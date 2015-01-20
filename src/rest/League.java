@@ -215,7 +215,7 @@ public class League {
                 rondes.add(r);
             }
             System.out.println("League round method, ronde: " + ronde);
-            ronde = 39-ronde;
+            ronde = 38-ronde;
             System.out.println("League round method, real ronde: " + ronde);
             return rondes.get(ronde);
         } catch (SAXException ex) {

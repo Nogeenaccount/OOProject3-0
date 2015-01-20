@@ -218,7 +218,7 @@ public class MenuTransfers extends State {
 	    @Override
 	    public void valueChanged(ListSelectionEvent e) {
 		//exception occurs here
-		if (teamList.getValueIsAdjusting() && buyOrSellList.getSelectedValue().equals("Buy")) {
+		if (teamList.getValueIsAdjusting() || buyOrSellList.getSelectedValue().equals("buy")) {
 		    playerArray.clear();
 		    for (int i = 0; i < StateManager.getLeague().getTeams().size(); i++) {
 			if (teamList.getSelectedValue().equals(StateManager.getLeague().getTeams().get(i).getTeamName())) {

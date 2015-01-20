@@ -151,10 +151,12 @@ public class MenuBetweenRounds extends State {
 
 
         
-        Match nextMatch = MatchLogic.findOwnMatch(StateManager.getLeague().getRounds()+1);
-        String nextOpp = nextMatch.getHomeTeam().getTeamName() + " ("+ nextMatch.getHomeTeam().getStadiumName()  +  ")";
-        if(!nextMatch.getHomeTeam().equals(StateManager.getLeague().getChosenTeam())){
+        Match nextMatch = MatchLogic.findOwnMatch(StateManager.getLeague().getRounds());
+        String nextOpp;
+        if(nextMatch.getHomeTeam().getTeamName().equals(StateManager.getLeague().getChosenTeam())){
             nextOpp = nextMatch.getAwayTeam().getTeamName() + " ("+ nextMatch.getAwayTeam().getStadiumName()  +  ")";
+        }else{
+            nextOpp = nextMatch.getHomeTeam().getTeamName() + " ("+ nextMatch.getHomeTeam().getStadiumName()  +  ")";
         }
         String lastRes = states.StateManager.getLeague().getLastResult();
         if(lastRes == null){
