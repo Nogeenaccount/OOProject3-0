@@ -88,7 +88,7 @@ public class League {
         l.addMiddenvelder(team.getPlayerByName(players[3]));
         l.addMiddenvelder(team.getPlayerByName(players[4]));
         l.addMiddenvelder(team.getPlayerByName(players[5]));
-        l.addMiddenvelder(team.getPlayerByName(players[6]));
+        l.addVerdediger(team.getPlayerByName(players[6]));
         l.addVerdediger(team.getPlayerByName(players[7]));
         l.addVerdediger(team.getPlayerByName(players[8]));
         l.addVerdediger(team.getPlayerByName(players[9]));
@@ -112,8 +112,9 @@ public class League {
 	    int rounds = Integer.parseInt(lElement.getElementsByTagName("matchesLeft").item(0).getTextContent());
 	    String gameName = lElement.getElementsByTagName("gameName").item(0).getTextContent();
 	    String chosenTeam = lElement.getElementsByTagName("chosenTeam").item(0).getTextContent();
+            String lastResult = lElement.getElementsByTagName("lastResult").item(0).getTextContent();
 	    League league = new League(leagueName, rounds, gameName, chosenTeam);
-
+            league.setLastResult(lastResult);
 	    NodeList teamList = doc.getElementsByTagName("team");
 	    NodeList playerlistxml = doc.getElementsByTagName("player");
 	    // predefine variables
@@ -333,6 +334,10 @@ public class League {
 	    Element chosenTeam = doc.createElement("chosenTeam");
 	    chosenTeam.appendChild(doc.createTextNode(this.getChosenTeam()));
 	    rootElement.appendChild(chosenTeam);
+            
+            Element lastResult = doc.createElement("lastResult");
+	    lastResult.appendChild(doc.createTextNode(this.getLastResult()));
+	    rootElement.appendChild(lastResult);
 
 	    //Element Teams
 	    for (int i = 0; i < this.teams.size(); i++) {
@@ -715,9 +720,6 @@ public class League {
         LastResultDetailed.add(u);
     }
 
-    /**
-     * @return the lastResult
-     */
     public String getLastResult() {
         return lastResult;
     }
