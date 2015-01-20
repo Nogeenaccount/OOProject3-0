@@ -74,6 +74,7 @@ public class MenuAftermath extends State {
 	matchResults.setForeground(Color.white);
 	matchResults.setFont(new Font("Arial", Font.PLAIN, 14));
 	matchResults.setEditable(false);
+        matchResults.setTabSize(7);
 
         //Preparing strings
         String Bookings = "Kaarten:\n";
@@ -120,15 +121,23 @@ public class MenuAftermath extends State {
 	
 	//DIT IS ALLEMAAL LOGIC JONGENS, MAAK HIERVOOR KLASSES IN BIJV LEAGUE AAN.
         //Nee.
+        //Where is the <3 ?
         Round thisRound = states.StateManager.getLeague().nextRound("Speelschema.xml",states.StateManager.getLeague().getRounds());
         for(int n=0;n<10;n++){
             Match temp = thisRound.getMatch(n);
             if(!temp.equals(MatchLogic.findOwnMatch(states.StateManager.getLeague().getRounds()))){
                 Team home = temp.getHomeTeam();
                 Team away = temp.getAwayTeam();
+                if(home.getTeamName().equals("Manchester United") || home.getTeamName().equals("Manchester City") || home.getTeamName().equals("Newcastle United") || home.getTeamName().equals("Queens Park Rangers") || home.getTeamName().equals("West Bromwich Albion") || home.getTeamName().equals("Crystal Palace") || 
+                        home.getTeamName().equals("Tottenham Hotspur") || home.getTeamName().equals("West Ham United") || home.getTeamName().equals("Southampton") || home.getTeamName().equals("Leicester City") || home.getTeamName().equals("Swansea City")){
                 temp = MatchResult.getResult(home,away,15);
                 states.StateManager.getLeague().processResult(temp.getHomeTeam(), temp.getAwayTeam(), temp.getHomeScore(), temp.getAwayScore());
-                othermatches = othermatches + temp.getHomeTeam().getTeamName() + " " + temp.getHomeScore() + "-" + temp.getAwayScore() + " " + temp.getHomeTeam().getTeamName()+"\n";
+                othermatches = othermatches + temp.getHomeTeam().getTeamName() + "\t " + temp.getHomeScore() + "-" + temp.getAwayScore() + "\t " + temp.getAwayTeam().getTeamName()+"\n";
+                }else{
+                       temp = MatchResult.getResult(home,away,15);
+                states.StateManager.getLeague().processResult(temp.getHomeTeam(), temp.getAwayTeam(), temp.getHomeScore(), temp.getAwayScore());
+                othermatches = othermatches + temp.getHomeTeam().getTeamName() + "\t\t " + temp.getHomeScore() + "-" + temp.getAwayScore() + "\t " + temp.getAwayTeam().getTeamName()+"\n";
+                }
             }
             
         }
