@@ -120,8 +120,8 @@ public class MatchLogic{
 	 */
 	public boolean scored(double O1, double D2, double E1, double E2, double t) {
 		double P;
-		double a = 5;
-		double b = 0.0006;
+		double a = 4;
+		double b = 0.001;
 		P = (O1 - D2/2)*Math.pow((E1/E2),(t/a))*b;
 		
 		if (Math.random() < P)
@@ -146,7 +146,7 @@ public class MatchLogic{
             
             
             if(scored(offenceSum(getTeam1()), defenceSum(getTeam2()), enduranceSum(getTeam1()), enduranceSum(getTeam2()), gettCurrent())){
-                int a = (int)(Math.round(Math.random()*3-0.5));
+                int a = (int)(Math.round(Math.random()*1.49));
                 spelert = getTeam1().getDefaultLineUp().getAanvallers().get(a);
                 return new Update(4, spelert, gettCurrent());
             }
@@ -302,21 +302,19 @@ public class MatchLogic{
     }
     
     public static String randomInjury(){
-        int aantal = 5;
+        int aantal = 4;
         double a = Math.random();
         if(a<1/aantal){
-            return "Kniebanden verrekt";
+            return "Broken ankle";
         }
         if(a<2/aantal){
-            return "Schouder uit de kom";
+            return "Dislocated shoulder";
         }
         if(a<3/aantal){
-            return "Gebroken middenvoetsbeentje";
+            return "Strained ligaments";
         }
-        if(a<4/aantal){
-            return "Teen gestoten";
-        }
-        return "Aanstelleritus";
+        
+        return "Torn hamstring";
         
     }
     
