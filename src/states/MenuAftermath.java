@@ -77,12 +77,12 @@ public class MenuAftermath extends State {
         matchResults.setTabSize(7);
 
         //Preparing strings
-        String Bookings = "Kaarten:\n";
-        String injuries = "Blessures:\n";
+        String Bookings = "Bookings:\n";
+        String injuries = "Injuries:\n";
         
-        
+        String tab = "  ";
         ArrayList<Update> last = states.StateManager.getLeague().getLastResultDetailed();
-        String result = states.StateManager.getLeague().getLastResult();
+        String result = tab+states.StateManager.getLeague().getLastResult();
         int round = states.StateManager.getLeague().getRounds();
         Match weddie = MatchLogic.findOwnMatch(round);
         for(int n=0;n<states.StateManager.getLeague().getLastResultDetailed().size();n++){
@@ -97,9 +97,9 @@ public class MenuAftermath extends State {
             
             
             switch(temp.getType()){
-                case 1: Bookings = Bookings + temp.getMinuut() + "' " + temp.getSpeler().getPlayerName() +" (" + name +")"+ ": Gele kaart\n"; break;
-                case 2: Bookings = Bookings + temp.getMinuut() + "' " + temp.getSpeler().getPlayerName() +" (" + name +")"+ ": Rode kaart\n";break;
-                case 3: injuries = injuries + temp.getMinuut() + "' " + temp.getSpeler().getPlayerName() + ": " + rest.MatchLogic.randomInjury() + "\n";break;
+                case 1: Bookings = Bookings + tab + temp.getMinuut() + "' " + temp.getSpeler().getPlayerName() +" (" + name +")"+ ": Yellow card\n"; break;
+                case 2: Bookings = Bookings + tab + temp.getMinuut() + "' " + temp.getSpeler().getPlayerName() +" (" + name +")"+ ": Red card\n";break;
+                case 3: injuries = injuries + tab + temp.getMinuut() + "' " + temp.getSpeler().getPlayerName() + ": " + rest.MatchLogic.randomInjury() + "\n";break;
                 case 4: 
                     if(n%2 == 0){
                         weddie.setHomeScore(weddie.getHomeScore()+1);
@@ -129,24 +129,29 @@ public class MenuAftermath extends State {
                 Team home = temp.getHomeTeam();
                 Team away = temp.getAwayTeam();
                 if(home.getTeamName().equals("Manchester United") || home.getTeamName().equals("Manchester City") || home.getTeamName().equals("Newcastle United") || home.getTeamName().equals("Queens Park Rangers") || home.getTeamName().equals("West Bromwich Albion") || home.getTeamName().equals("Crystal Palace") || 
-                        home.getTeamName().equals("Tottenham Hotspur") || home.getTeamName().equals("West Ham United") || home.getTeamName().equals("Southampton") || home.getTeamName().equals("Leicester City") || home.getTeamName().equals("Swansea City")){
+                        home.getTeamName().equals("Tottenham Hotspur") || home.getTeamName().equals("West Ham United") || home.getTeamName().equals("Southampton") || home.getTeamName().equals("Sunderland")|| home.getTeamName().equals("Leicester City") || home.getTeamName().equals("Swansea City")){
                 temp = MatchResult.getResult(home,away,15);
                 states.StateManager.getLeague().processResult(temp.getHomeTeam(), temp.getAwayTeam(), temp.getHomeScore(), temp.getAwayScore());
-                othermatches = othermatches + temp.getHomeTeam().getTeamName() + "\t " + temp.getHomeScore() + "-" + temp.getAwayScore() + "\t " + temp.getAwayTeam().getTeamName()+"\n";
+                othermatches = othermatches + tab + temp.getHomeTeam().getTeamName() + "\t" + temp.getHomeScore() + "-" + temp.getAwayScore() + "\t " + temp.getAwayTeam().getTeamName()+"\n";
                 }else{
                        temp = MatchResult.getResult(home,away,15);
                 states.StateManager.getLeague().processResult(temp.getHomeTeam(), temp.getAwayTeam(), temp.getHomeScore(), temp.getAwayScore());
-                othermatches = othermatches + temp.getHomeTeam().getTeamName() + "\t\t " + temp.getHomeScore() + "-" + temp.getAwayScore() + "\t " + temp.getAwayTeam().getTeamName()+"\n";
+                othermatches = othermatches + tab + temp.getHomeTeam().getTeamName() + "\t\t" + temp.getHomeScore() + "-" + temp.getAwayScore() + "\t " + temp.getAwayTeam().getTeamName()+"\n";
                 }
             }
             
         }
+        if(Bookings.equals("Bookings:\n")){
+            Bookings = Bookings + tab + "No bookings!\n";
+        }
+        if(injuries.equals("Injuries:\n")){
+            injuries = injuries + tab + "No injuries!\n";
+        }
 	String roundResults
-		= "Here is the result of your match:" + "\n"
-		+ yourRoundResult + "\n" + "\n"
-		+ Bookings + "\n" + "\n"
-		+ injuries + "\n" + "\n"
-		+ "And here are the results of the other matches:" + "\n"
+		= tab + yourRoundResult + "\n" + "\n"
+		+ tab + Bookings + "\n" 
+		+ tab + injuries + "\n" 
+		+ tab + "Other results today:" + "\n"
 		+ othermatches;
 
         

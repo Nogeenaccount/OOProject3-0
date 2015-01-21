@@ -23,7 +23,7 @@ public class ThreadTest implements Runnable {
         int round = states.StateManager.getLeague().getRounds();
         Match weddie = MatchLogic.findOwnMatch(round);
         String newLine = System.getProperty("line.separator");
-	String beginText = "Welkom in " + weddie.getHomeTeam().getStadiumName() + "!" + newLine;
+	String beginText = "     " + weddie.getHomeTeam().getTeamName() + " welcomes you to their \"" + weddie.getHomeTeam().getStadiumName() + "\"!" + newLine;
 	workSpace.setText(beginText);
 
 	//String advancedText = "You lost";
@@ -44,8 +44,7 @@ public class ThreadTest implements Runnable {
         //Setting standard String Values
         
         String updateText = "";
-        String mainText = thisMatch.gettCurrent()
-                      + "e Minuut" + ", Stand: " 
+        String mainText = "1st minute" + ", Score: " 
                       + thisMatch.getTeam1().getTeamName()
                       + " "+thisMatch.getScore1()
                       + "-" 
@@ -54,15 +53,30 @@ public class ThreadTest implements Runnable {
                       +thisMatch.getTeam2().getTeamName()
                       + newLine;
         
-        for(int n=0;n<14;n++){
+        for(int n=0;n<90;n++){
+            
+            
             ArrayList<Update> tick = thisMatch.oneTick();
             
-            updateText = updateText 
-                        + thisMatch.LineGenerator(tick.get(0),thisMatch.getTeam1(),thisMatch.getTeam2())
-                        + thisMatch.LineGenerator(tick.get(1),thisMatch.getTeam2(),thisMatch.getTeam1());
             
-            mainText = thisMatch.gettCurrent()
-                      + "e Minuut" + ", Stand: " 
+            if(tick.size()==2){
+                if(tick.get(0).getMinuut()==tick.get(1).getMinuut()){
+                tick.get(1).setMinuut(tick.get(1).getMinuut()+3);
+                }
+                updateText = updateText 
+                       + thisMatch.LineGenerator(tick.get(0),thisMatch.getTeam1(),thisMatch.getTeam2())
+                       + thisMatch.LineGenerator(tick.get(1),thisMatch.getTeam2(),thisMatch.getTeam1());
+            }
+            int time = thisMatch.gettCurrent();
+            
+            if (time==90){
+                updateText = updateText + "     The referree has blown his whistle for the last time today:\n     End of the match!";
+            }
+            if(time>90){
+                time=90;
+            }
+            mainText = "      "+time
+                      + "th minute" + ", Score: " 
                       + thisMatch.getTeam1().getTeamName()
                       + " "+thisMatch.getScore1()
                       + "-" 
@@ -73,7 +87,7 @@ public class ThreadTest implements Runnable {
             
                 workSpace.setText(beginText + newLine + mainText + newLine + updateText);
                 try{
-                    Thread.sleep(100);
+                    Thread.sleep(80);
                 }
                 catch(InterruptedException e){
                     System.out.println(e);
