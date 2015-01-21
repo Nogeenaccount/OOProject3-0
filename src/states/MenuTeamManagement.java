@@ -101,7 +101,17 @@ public class MenuTeamManagement extends State {
         position9.setSelectedItem((String)chosenTeam.getLineUp().getVerdedigers().get(2).getPlayerName());
         position10.setSelectedItem((String)chosenTeam.getLineUp().getVerdedigers().get(3).getPlayerName());
         position11.setSelectedItem((String)chosenTeam.getLineUp().getKeeper().getPlayerName());
-        
+        System.out.println(position1.getSelectedItem());
+        System.out.println(position2.getSelectedItem());
+        System.out.println(position3.getSelectedItem());
+        System.out.println(position4.getSelectedItem());
+        System.out.println(position5.getSelectedItem());
+        System.out.println(position6.getSelectedItem());
+        System.out.println(position7.getSelectedItem());
+        System.out.println(position8.getSelectedItem());
+        System.out.println(position9.getSelectedItem());
+        System.out.println(position10.getSelectedItem());
+        System.out.println(position11.getSelectedItem());
         
 	//Position 1 JComboBox
 	c.weightx = 0.5;

@@ -76,7 +76,6 @@ public class MenuMatchScreen extends State {
 	Thread t = new Thread(new ThreadTest(buttonAdvance));
 	rest.ThreadTest.setWorkSpace(matchProgress);
 	t.start();
-	System.out.println("Tried: empty alreadyTried, Problem: filler data");
 
 	setBackground(panelPanelImage);
     }
