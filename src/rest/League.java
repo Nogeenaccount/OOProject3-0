@@ -65,6 +65,13 @@ public class League {
         }
         return t;
     }
+    
+    public void roundsReset(){
+        this.rounds=38;
+        for(int i =0 ; i< this.getTeams().size(); i++){
+            this.getTeams().get(i).clearTeamStats();
+        }
+    }
 
     //Test
     //suck a cock
@@ -188,6 +195,9 @@ public class League {
     }
     
     public Round nextRound(String fileName, int ronde) {
+        if(ronde == 0){
+            this.roundsReset();
+        }
         try {
             int roundNr = 0;
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -223,19 +233,29 @@ public class League {
                 c += 10;
                 rondes.add(r);
             }
+            if(ronde > 0){
             System.out.println("League round method, ronde: " + ronde);
             ronde = 38-ronde;
             System.out.println("League round method, real ronde: " + ronde);
+            
             return rondes.get(ronde);
-        } catch (SAXException ex) {
+            }else{
+                return rondes.get(0);
+                
+        
+        } } 
+        catch (SAXException ex) {
             Logger.getLogger(League.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(League.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(League.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new Round();
-        }
+        
+         
+              return new Round();
+        
+    }
     /**
      * toString: turns League into a printable String
      *
