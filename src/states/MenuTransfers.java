@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -430,11 +431,17 @@ public class MenuTransfers extends State {
         String offerFormat = (String) teamList.getSelectedValue() + " " + (String) attemptPrice.getText() + " " + (String) playerList.getSelectedValue();
         boolean boolean1 = StateManager.getLeague().Transfer(soortTransactie, offerFormat);
         alreadyTried.add((String) playerList.getSelectedValue());
+        
         if (boolean1) {
-            lastAction.setText("You succesfully bought:" + (String) playerList.getSelectedValue());
+            lastAction.setText("You succesfully bought/sold: " + (String) playerList.getSelectedValue());
+            
+            //Redo default lineup
+            rest.Team team1 = StateManager.getLeague().getTeamByName((String) teamList.getSelectedValue());
+            StateManager.getLeague().chosenTeam().setLineUp(StateManager.getLeague().chosenTeam().getDefaultLineUp());
+            team1.setLineUp(team1.getDefaultLineUp());
         }
         else {
-            lastAction.setText("You failed at buying:" + (String) playerList.getSelectedValue());
+            lastAction.setText("You failed at buying/selling: " + (String) playerList.getSelectedValue());
         }
     }
     
@@ -443,7 +450,20 @@ public class MenuTransfers extends State {
         boolean boolean1 = StateManager.getLeague().TransferOffer("Sell", offer);
         tempOffersTried.add((String) offerList.getSelectedValue());
         if (boolean1) {
-            lastAction.setText("You acepted this offer:" + offer);
+            lastAction.setText("You acepted this offer: " + offer);
+            
+            //Redo default lineup
+            Scanner sc = new Scanner(offer);
+            String team = sc.next();
+            if (sc.hasNextInt() == false) {
+                team = team + " " + sc.next();
+            }
+            if (sc.hasNextInt() == false) {
+                team = team + " " + sc.next();
+            }
+            rest.Team team1 = StateManager.getLeague().getTeamByName(team);
+            StateManager.getLeague().chosenTeam().setLineUp(StateManager.getLeague().chosenTeam().getDefaultLineUp());
+            team1.setLineUp(team1.getDefaultLineUp());
         }
     }
 
