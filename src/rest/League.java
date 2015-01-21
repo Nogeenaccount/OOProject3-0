@@ -134,6 +134,7 @@ public class League {
 	    int end;
 	    int off;
 	    int def;
+            int wins; int draws; int losses; int goalsMade; int goalsAgainst; int goalsDiffrence; int winStreak;
 	    String pos;
 	    Player player;
 	    int cc;
@@ -145,8 +146,16 @@ public class League {
 		teamName = tElement.getAttribute("name");
 		stadiumName = tElement.getElementsByTagName("stadiumName").item(0).getTextContent();
 		budget = Integer.parseInt(tElement.getElementsByTagName("budget").item(0).getTextContent());
+                wins = Integer.parseInt(tElement.getElementsByTagName("wins").item(0).getTextContent());
+                draws = Integer.parseInt(tElement.getElementsByTagName("draws").item(0).getTextContent());
+                losses = Integer.parseInt(tElement.getElementsByTagName("losses").item(0).getTextContent());
+                goalsMade = Integer.parseInt(tElement.getElementsByTagName("goalsMade").item(0).getTextContent());
+                goalsAgainst = Integer.parseInt(tElement.getElementsByTagName("goalsAgainst").item(0).getTextContent());
+                goalsDiffrence = Integer.parseInt(tElement.getElementsByTagName("goalsDifference").item(0).getTextContent());
+                winStreak = Integer.parseInt(tElement.getElementsByTagName("winStreak").item(0).getTextContent());
                 lineUpString = tElement.getElementsByTagName("lineUp").item(0).getTextContent();
 		team = new Team(teamName, stadiumName, budget);
+                team.setWins(wins);team.setDraws(draws);team.setLosses(losses);team.setGoalsMade(goalsMade);team.setGoalsAgainst(goalsAgainst);
                 int j = tElement.getElementsByTagName("player").getLength();
 		for (int p = c; p < (c + j); p++) {
 		    pNode = playerlistxml.item(p);
