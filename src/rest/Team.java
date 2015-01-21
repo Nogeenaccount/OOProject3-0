@@ -69,6 +69,18 @@ public class Team {
     }
     
     /**
+     * Reset team stats to zero when entering new season
+     */
+    public void clearTeamStats(){
+        this.setWins(0);
+        this.setLosses(0);
+        this.setWinStreak(0);
+        this.setDraws(0);
+        this.setGoalsMade(0);
+        this.setGoalsAgainst(0);
+        this.setPlayed(0);
+     }
+    /**
      * add: adds player to the team
      *
      * @param player
