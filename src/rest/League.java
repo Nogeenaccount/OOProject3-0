@@ -565,7 +565,7 @@ public class League {
                 System.out.println("Player you're selling: " + yourPlayer);
                 
 		int offer = (int) ((yourPlayer.getPrice() * (Math.random() + 0.2)* 1.5));
-		if (thatBuyer.getTeamName().equals(this.getChosenTeam())  || (thatBuyer.getBudget() < offer)) {
+		if (thatBuyer.getTeamName().equals(this.getChosenTeam())  || (thatBuyer.getBudget() < offer) || this.chosenTeam().affordToSell(yourPlayer) == false) {
 			String offerLooped = this.generateOffer();
 			return offerLooped;
 		} else {
@@ -642,7 +642,7 @@ public class League {
 		if (soortTransactie.equalsIgnoreCase("buy")) {
                     Player player = team.getPlayerByName(playerName);
                     System.out.println("Check name:" + player);
-                    if (League.acceptOffer(bod, player) == true && this.chosenTeam().getBudget() >= bod) {
+                    if (League.acceptOffer(bod, player) == true && this.chosenTeam().getBudget() >= bod && team.affordToSell(player)) {
                         this.chosenTeam().buyPlayer(player, bod);
                         team.sellPlayer(player, bod);
                         return true;
@@ -651,7 +651,7 @@ public class League {
                 else if (soortTransactie.equalsIgnoreCase("sell")) {
                     Player player = this.chosenTeam().getPlayerByName(playerName);
                     System.out.println("Check name:" + player);
-                    if (League.acceptOffer2(bod, player) == true && team.getBudget() >= bod) {
+                    if (League.acceptOffer2(bod, player) == true && team.getBudget() >= bod && this.chosenTeam().affordToSell(player)) {
                         //I would write an acceptOffer for selling player (polar opposite of for buying players)
 			this.chosenTeam().sellPlayer(player, bod);
 			team.buyPlayer(player, bod);

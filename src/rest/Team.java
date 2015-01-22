@@ -349,6 +349,36 @@ public class Team {
         return tempList;
     }
     
+    public boolean affordToSell(Player player) {
+        ArrayList<Player> aanvallers = new ArrayList<>();
+	ArrayList<Player> middenvelders = new ArrayList<>();
+	ArrayList<Player> verdedigers = new ArrayList<>();
+	ArrayList<Player> keepers = new ArrayList<>();
+        
+        for (int i =0; i<this.players.size(); i++){
+		switch (this.players.get(i).getPosition()){
+			case "G" : keepers.add(this.players.get(i)); break;
+			case "M" : middenvelders.add(this.players.get(i)); break;
+			case "F" : aanvallers.add(this.players.get(i)); break;
+			case "D" : verdedigers.add(this.players.get(i)); break; 
+		}
+	}
+        
+        if(player.getPosition().equals("G") && (1 < keepers.size())) {
+            return true;
+        }
+        if(player.getPosition().equals("D") && (4 < verdedigers.size())) {
+            return true;
+        }
+        if(player.getPosition().equals("M") && (3 < middenvelders.size())) {
+            return true;
+        }
+        if(player.getPosition().equals("F") && (3 < aanvallers.size())) {
+            return true;
+        }
+        return false;
+    }
+    
     /**
     * getDefaultLineUp: returns default optimal lineUp from team this
     * @return LineUp
