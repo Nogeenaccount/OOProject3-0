@@ -48,7 +48,6 @@ public class MatchLogic{
      * Generates an update for one tick of a match for the Home team. If the hometeam doesn't score, there is a small chance that something different happens, yellow/red card or injury.
      * @return an update object with the current time of the match, a random player, and the type of event that happened
      */
-     
     public Update tickHome(){
             int typ =0;
             Player spelert = null;
@@ -88,7 +87,6 @@ public class MatchLogic{
      * Generates an update for one tick of a match for the awayteam. If the awayteam doesn't score, there is a small chance that something different happens, yellow/red card or injury.
      * @return an update object with the current time of the match, a random player, and the type of event that happened
      */
-
     public Update tickAway(){
             int typ =0;
             Player spelert = null;
@@ -149,7 +147,7 @@ public class MatchLogic{
      * @param s the awayteam
      * @return String the stringrepresentation of the ubdate object
      */
-    public String LineGenerator(Update update, Team t, Team s){
+    public static String LineGenerator(Update update, Team t, Team s){
             String newLine = System.getProperty("line.separator");
             String tab = "    ";
             if(update.getMinuut()==0){
@@ -160,10 +158,10 @@ public class MatchLogic{
             switch(update.getType()){
                 case 0: break;
                 case 1: result = result + " " + update.getMinuut() + "' " + tab+ tab+ "Booking at " + t.getTeamName() + "!" 
-                            + newLine + tab + tab+ update.getSpeler().getPlayerName() + " is shown a yellow card after a "+newLine+tab+tab+ "hazardous challenge on " + s.getDefaultLineUp().getRandomPlayer().getPlayerName() + "!" + newLine + newLine; 
+                            + newLine + tab + tab+ update.getSpeler().getPlayerName() + " is shown a yellow card after a "+newLine+tab+tab+ "hazardous challenge on " + s.getLineUp().getRandomPlayer().getPlayerName() + "!" + newLine + newLine; 
                         break;
                 case 2: result = result + " " + update.getMinuut() + "' " + tab+tab+ "Red card at " + t.getTeamName() + "!" 
-                        + newLine + tab +tab+ update.getSpeler().getPlayerName() + " sees red after a schandalous "+ newLine + tab +tab+ "charge on " + s.getDefaultLineUp().getRandomPlayer().getPlayerName() + "!" + newLine + newLine; 
+                        + newLine + tab +tab+ update.getSpeler().getPlayerName() + " sees red after a schandalous "+ newLine + tab +tab+ "charge on " + s.getLineUp().getRandomPlayer().getPlayerName() + "!" + newLine + newLine; 
                         break;
                 case 3: result = result + " " + update.getMinuut() + "' " + tab+"Injury at " + t.getTeamName() + "!" 
                             + newLine + tab + tab+ update.getSpeler().getPlayerName() + " falls down like a " + newLine + tab +tab+  "dying swallow, and " + newLine + tab + tab+ "will most likely not play next match!" + newLine + newLine; 
@@ -171,7 +169,7 @@ public class MatchLogic{
                 case 4: 
                     Player assistMan=new Player();
                     do{
-                    assistMan = t.getDefaultLineUp().getRandomPlayer();
+                    assistMan = t.getLineUp().getRandomPlayer();
                     }while (assistMan.equals(update.getSpeler()));
                     result = result + " " + update.getMinuut() + "' " + tab+t.getTeamName() + " SCORES!" + newLine + tab + tab+ update.getSpeler().getPlayerName() + " scores after " + newLine + tab + tab+ getScoreMethod() + assistMan.getPlayerName() + "!" + newLine + newLine;
                         break;
