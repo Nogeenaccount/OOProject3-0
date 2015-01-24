@@ -76,15 +76,7 @@ public class League {
     //Test
     //suck a cock
     
-    public Team getTeamByName (String name) {
-        Team team = null;
-        for (int i = 0; i < this.getTeams().size(); i++) {
-            if (name.equals(this.getTeams().get(i).getTeamName())) {
-                team = this.getTeams().get(i);
-            }
-        }
-        return team;
-    }
+    
     
     
     public static void setCustomLineUp(Team team, String[] players) {
@@ -561,7 +553,7 @@ public class League {
                
 		Team thatBuyer = this.getTeams().get((int) Math.floor(Math.random() * this.getTeams().size()));
                 System.out.println("Team you will be selling to:" + thatBuyer.getTeamName());
-                Player yourPlayer = this.getTeamByName(this.getChosenTeam()).getPlayers().get((int) Math.floor(Math.random() * this.getTeamByName(this.getChosenTeam()).getPlayers().size()));
+                Player yourPlayer = this.getByName(this.getChosenTeam()).getPlayers().get((int) Math.floor(Math.random() * this.getByName(this.getChosenTeam()).getPlayers().size()));
                 System.out.println("Player you're selling: " + yourPlayer);
                 
 		int offer = (int) ((yourPlayer.getPrice() * (Math.random() + 0.2)* 1.5));

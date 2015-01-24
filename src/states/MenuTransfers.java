@@ -62,7 +62,7 @@ public class MenuTransfers extends State {
 	budgetDisplay.setOpaque(true);
 	budgetDisplay.setPreferredSize(new Dimension(400, 20));
 	budgetDisplay.setEditable(false);
-	budgetDisplay.setText("Your budget: " + StateManager.getLeague().getTeamByName(StateManager.getLeague().getChosenTeam()).getBudget());
+	budgetDisplay.setText("Your budget: " + StateManager.getLeague().getByName(StateManager.getLeague().getChosenTeam()).getBudget());
 	budgetDisplay.setBackground(Color.decode("#525151"));
 	budgetDisplay.setForeground(Color.white);
 	budgetDisplay.setMinimumSize(new Dimension(400, 20));
@@ -269,7 +269,7 @@ public class MenuTransfers extends State {
 	    public void actionPerformed(ActionEvent e) {
 		if (alreadyTried.contains((String)playerList.getSelectedValue()) == false) {
                     doAttempt();
-                    budgetDisplay.setText("Your budget: " + StateManager.getLeague().getTeamByName(StateManager.getLeague().getChosenTeam()).getBudget());
+                    budgetDisplay.setText("Your budget: " + StateManager.getLeague().getByName(StateManager.getLeague().getChosenTeam()).getBudget());
                     playerList.setListData(GiveplayerList((String)buyOrSellList.getSelectedValue(), (String)teamList.getSelectedValue()));
 		}
 	    }
@@ -329,7 +329,7 @@ public class MenuTransfers extends State {
 	    public void actionPerformed(ActionEvent e) {
                 if (tempOffersTried.contains((String)offerList.getSelectedValue()) == false) {
                     doOffer();
-                    budgetDisplay.setText("Your budget: " + StateManager.getLeague().getTeamByName(StateManager.getLeague().getChosenTeam()).getBudget());
+                    budgetDisplay.setText("Your budget: " + StateManager.getLeague().getByName(StateManager.getLeague().getChosenTeam()).getBudget());
                     playerList.setListData(GiveplayerList((String)buyOrSellList.getSelectedValue(), (String)teamList.getSelectedValue()));
 		}
 	    }
@@ -387,7 +387,7 @@ public class MenuTransfers extends State {
     
     public String[] GiveplayerList(String buyOrSell, String team) {
         ArrayList<String> playerList = new ArrayList();
-        rest.Team team1 = StateManager.getLeague().getTeamByName(team);
+        rest.Team team1 = StateManager.getLeague().getByName(team);
         
         if (buyOrSell.equals("Buy")) {
             for (int i = 0; i < team1.getPlayers().size(); i++) {
@@ -436,7 +436,7 @@ public class MenuTransfers extends State {
             lastAction.setText("You succesfully bought/sold: " + (String) playerList.getSelectedValue());
             
             //Redo default lineup
-            rest.Team team1 = StateManager.getLeague().getTeamByName((String) teamList.getSelectedValue());
+            rest.Team team1 = StateManager.getLeague().getByName((String) teamList.getSelectedValue());
             StateManager.getLeague().chosenTeam().setLineUp(StateManager.getLeague().chosenTeam().getDefaultLineUp());
             team1.setLineUp(team1.getDefaultLineUp());
         }
@@ -461,7 +461,7 @@ public class MenuTransfers extends State {
             if (sc.hasNextInt() == false) {
                 team = team + " " + sc.next();
             }
-            rest.Team team1 = StateManager.getLeague().getTeamByName(team);
+            rest.Team team1 = StateManager.getLeague().getByName(team);
             StateManager.getLeague().chosenTeam().setLineUp(StateManager.getLeague().chosenTeam().getDefaultLineUp());
             team1.setLineUp(team1.getDefaultLineUp());
         }
