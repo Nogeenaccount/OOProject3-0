@@ -59,8 +59,13 @@ public class MenuTourneyOverview extends State {
             public int compare(final String[] entry1, final String[] entry2) {
                 final int points1 = Integer.parseInt(entry1[8]);
                 final int points2 = Integer.parseInt(entry2[8]);
-                Integer.compare(points1, points2);
-                return Integer.compare(points1, points2) * -1;
+                int compareResult = Integer.compare(points1, points2) * -1;
+                    if (compareResult == 0) {
+                        final int pointsE1 = Integer.parseInt(entry1[7]);
+                        final int pointsE2 = Integer.parseInt(entry2[7]);
+                        compareResult = Integer.compare(pointsE1, pointsE2) * -1;
+                    }
+                return compareResult;
 
             }
         });
