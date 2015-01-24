@@ -120,8 +120,8 @@ public class MatchLogic{
 	 */
 	public boolean scored(double O1, double D2, double E1, double E2, double t) {
 		double P;
-		double a = 4;
-		double b = 0.001;
+		double a = 700;
+		double b = 0.0006;
 		P = (O1 - D2/2)*Math.pow((E1/E2),(t/a))*b;
 		
 		if (Math.random() < P)

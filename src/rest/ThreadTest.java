@@ -42,15 +42,24 @@ public class ThreadTest implements Runnable {
         MatchLogic thisMatch = new MatchLogic(15,homeTeam,awayTeam);
         
         //Setting standard String Values
+        String homeTeamName = homeTeam.getTeamName();
+        String awayTeamName = awayTeam.getTeamName();
+        
+        if(homeTeamName.equals("Queens Park Rangers")){
+            homeTeamName = "QPR";
+        }
+        if(awayTeamName.equals("Queens Park Rangers")){
+            awayTeamName = "QPR";
+        }
         
         String updateText = "";
         String mainText = "1st minute" + ", Score: " 
-                      + thisMatch.getTeam1().getTeamName()
+                      + homeTeamName
                       + " "+thisMatch.getScore1()
                       + "-" 
                       + thisMatch.getScore2()
                       + " "
-                      +thisMatch.getTeam2().getTeamName()
+                      + awayTeamName
                       + newLine;
         
         for(int n=0;n<90;n++){
@@ -77,12 +86,12 @@ public class ThreadTest implements Runnable {
             }
             mainText = "      "+time
                       + "th minute" + ", Score: " 
-                      + thisMatch.getTeam1().getTeamName()
+                      + homeTeamName
                       + " "+thisMatch.getScore1()
                       + "-" 
                       + thisMatch.getScore2()
                       + " "
-                      +thisMatch.getTeam2().getTeamName()
+                      + awayTeamName
                       + newLine;
             
                 workSpace.setText(beginText + newLine + mainText + newLine + updateText);
