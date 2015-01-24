@@ -58,7 +58,7 @@ public class MenuTeamManagement extends State {
 	createSpace();
 
 	//Initialise JComboBoxes
-        rest.Team chosenTeam = StateManager.getLeague().getTeamByName(StateManager.getLeague().getChosenTeam());
+        rest.Team chosenTeam = StateManager.getLeague().getByName(StateManager.getLeague().getChosenTeam());
 	String[] playerNames = null;
 	playerNames = new String[chosenTeam.getPlayers().size()];
 	for (int j = 0; j < chosenTeam.getPlayers().size(); j++) {
@@ -227,7 +227,7 @@ public class MenuTeamManagement extends State {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		enableButtons();
-                rest.Team chosenOne = StateManager.getLeague().getTeamByName(StateManager.getLeague().getChosenTeam());
+                rest.Team chosenOne = StateManager.getLeague().getByName(StateManager.getLeague().getChosenTeam());
                 StateManager.getLeague().setCustomLineUp(chosenOne, playersSelected());
 	    }
 	});

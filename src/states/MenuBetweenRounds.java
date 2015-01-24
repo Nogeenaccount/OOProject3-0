@@ -142,7 +142,7 @@ public class MenuBetweenRounds extends State {
 	textFieldBudget.setFont(new Font("Arial", Font.PLAIN, 14));
 
 	int yourBudget = 0;
-	rest.Team yourTeam = StateManager.getLeague().getTeamByName(StateManager.getLeague().getChosenTeam());
+	rest.Team yourTeam = StateManager.getLeague().getByName(StateManager.getLeague().getChosenTeam());
         yourBudget = yourTeam.getBudget();
 
         if(StateManager.getLeague().getRounds() <= 0) {

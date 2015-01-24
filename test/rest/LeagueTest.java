@@ -7,6 +7,7 @@ package rest;
 
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -77,4 +78,32 @@ public class LeagueTest {
 	testleague.setRounds(34);
 	assertEquals(testleague.getRounds(),34);
     }
+    
+    
+    @Test
+    public void getByNameTest(){
+        Team test = testleague.getByName("Arsenal");
+        assertEquals(test,testleague.getTeams().get(0));
+        assertFalse(test.equals(testleague.getTeams().get(1)));
+    }
+    
+    @Test
+    public void roundsResetTest(){
+        testleague.getTeams().get(5).setDraws(500);
+        testleague.setRounds(0);
+        testleague.roundsReset();
+        assertEquals(testleague.getTeams().get(5).getDraws(),0);
+        assertEquals(testleague.getRounds(),38);
+    }
+    
+    @Test
+    public void setCustomLineUpTest(){
+        String[] testArray = new String[20];
+        for(int n=0;n<15;n++){
+            testArray[n] = testleague.getTeams().get(0).getPlayers().get(n).getPlayerName();
+        }
+        testleague.setCustomLineUp(testleague.getTeams().get(0), testArray);
+        assertEquals(testleague.getTeams().get(0).getLineUp().getAanvallers().get(0),testleague.getTeams().get(0).getPlayers().get(0));
+    }
+    
 }
