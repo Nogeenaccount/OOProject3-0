@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author user
+ * @author Matthias Tavasszy
  */
 public class MatchLogicTest {
 
