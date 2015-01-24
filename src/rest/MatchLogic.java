@@ -45,9 +45,10 @@ public class MatchLogic{
     }
 
     /**
-     * comment pls
-     * @return Update
+     * Generates an update for one tick of a match for the Home team. If the hometeam doesn't score, there is a small chance that something different happens, yellow/red card or injury.
+     * @return an update object with the current time of the match, a random player, and the type of event that happened
      */
+     
     public Update tickHome(){
             int typ =0;
             Player spelert = null;
@@ -84,8 +85,8 @@ public class MatchLogic{
         }
 
     /**
-     * comment pls
-     * @return Update
+     * Generates an update for one tick of a match for the awayteam. If the awayteam doesn't score, there is a small chance that something different happens, yellow/red card or injury.
+     * @return an update object with the current time of the match, a random player, and the type of event that happened
      */
 
     public Update tickAway(){
@@ -142,11 +143,11 @@ public class MatchLogic{
         }
 
     /**
-     * comment pls
-     * @param Update update
-     * @param Team t
-     * @param Team s
-     * @return String
+     * Generates a string to display in the live feed during a match.
+     * @param update the update object to generate a line from
+     * @param t the hometeam 
+     * @param s the awayteam
+     * @return String the stringrepresentation of the ubdate object
      */
     public String LineGenerator(Update update, Team t, Team s){
             String newLine = System.getProperty("line.separator");
@@ -181,8 +182,8 @@ public class MatchLogic{
         }
 
     /**
-     * comment pls
-     * @return ArrayList<Update>
+     * Does everything that has to happen during one tick in a match. Updates the time, and processes update objects
+     * @return ArrayList<Update> An arraylist containing two update objects, one for the hometeam, one for the awayteam
      */
     public ArrayList<Update> oneTick(){
         Update updateHome = tickHome();
@@ -220,8 +221,8 @@ public class MatchLogic{
     }
 
     /**
-     * comment pls
-     * @return Match
+     * Finds the match of the chosen team in a certain round
+     * @return Match the match of the chosen team during the chosen round
      */       
     public static Match findOwnMatch(int round){
        Round temp = states.StateManager.getLeague().nextRound("Speelschema.xml",round);
