@@ -500,56 +500,36 @@ public class League {
 	public static boolean acceptOffer(int bod, Player x) {
 
 		int price = x.getPrice();
-
-		if (bod == price) {
-			if (Math.random() > 0.5) {
-                            System.out.println("case1");
-				return true;
-			}
-
-		} else if (bod < price && bod > 0.8 * price) {
-			if (Math.random() > 0.7) {
-                            System.out.println("case2");
-
-				return true;
-			}
-		} else if (bod > price && bod < 1.25 * price) {
-			if (Math.random() > 0.3) {
-                            System.out.println("case3");
-				return true;
-			}
-		} else if (bod > 1.25 * price) {
-                    System.out.println("case4");
-			return true;
+//
+//		if (bod == price) {
+//			if (Math.random() > 0.5) {
+//                            System.out.println("case1");
+//				return true;
+//			}
+//
+//		} else if (bod < price && bod > 0.8 * price) {
+//			if (Math.random() > 0.7) {
+//                            System.out.println("case2");
+//
+//				return true;
+//			}
+//		} else if (bod > price && bod < 1.25 * price) {
+//			if (Math.random() > 0.3) {
+//                            System.out.println("case3");
+//				return true;
+//			}
+//		} else if (bod > 1.25 * price) {
+//                    System.out.println("case4");
+//			return true;
+//		}
+		
+		//uses the nicely asymptotic function 1-1/2x
+		if (price>0 && Math.random() < (1-(1/((float)2*(bod/price))))) {
+		    System.out.println("case1");
+		    return true;
 		}
 		return false;
 
-	}
-        
-        public static boolean acceptOffer2(int bod, Player x) {
-
-		int price = x.getPrice();
-
-		if (bod == price) {
-                        if (Math.random() > 0.5) {
-                            System.out.println("case3");
-                            return true;
-			}
-		} else if (bod < price && bod > 0.8 * price) {
-                        if (Math.random() > 0.3) {
-                            System.out.println("case2");
-                            return true;
-			}
-		} else if (bod > price && bod < 1.25 * price) {
-			if (Math.random() > 0.7) {
-                            System.out.println("case1");
-                            return true;
-                        }
-		} else if (bod > 1.25 * price) {
-                        System.out.println("case2");
-                        return false;
-		}
-		return true;
 	}
 
         /**
@@ -657,7 +637,7 @@ public class League {
                 else if (soortTransactie.equalsIgnoreCase("sell")) {
                     Player player = this.chosenTeam().getPlayerByName(playerName);
                     System.out.println("Check name:" + player);
-                    if (League.acceptOffer2(bod, player) == true && team.getBudget() >= bod && this.chosenTeam().affordToSell(player)) {
+                    if (League.acceptOffer(bod, player) == true && team.getBudget() >= bod && this.chosenTeam().affordToSell(player)) {
                         //I would write an acceptOffer for selling player (polar opposite of for buying players)
 			this.chosenTeam().sellPlayer(player, bod);
 			team.buyPlayer(player, bod);
