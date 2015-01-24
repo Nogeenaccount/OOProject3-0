@@ -37,6 +37,11 @@ public class LeagueTest {
 	assertEquals(testleague.getTeams().get(17).getPlayers().get(21).getPlayerName(), "Christian Eriksen");
    	assertEquals(testleague.getTeams().get(17).getPlayers().get(21).getShirtNumber(), 22);
 	assertEquals(testleague.getTeams().get(14).getPlayers().get(5).getPrice(),10400000 );
+    
+        League testleague2 = League.readResources("notexisting.xml");
+        League emptyleague = new League("", 0, "", "");
+        assertEquals(testleague2,emptyleague);
+    
     }
     
     @Test
@@ -62,6 +67,21 @@ public class LeagueTest {
 	assertEquals(testleague.getTeams().size(), 20);
 	testleague.add(testleague.getTeams().get(3));
 	assertEquals(testleague.getTeams().size(), 20);
+    }
+    
+    @Test
+    public void equalsTest(){
+        assertFalse(testleague.equals(new Team("test","test",0)));
+        League testleague2 = testleague;
+        testleague2.setTeam(0, testleague.getTeams().get(7));
+        assertFalse(testleague.equals(testleague2));
+    }
+    
+    @Test
+    public void chosenTeamTest(){
+        assertEquals(testleague.chosenTeam(),null);
+        testleague.setChosenTeam("Arsenal");
+        assertEquals(testleague.chosenTeam(),testleague.getTeams().get(0));
     }
     
     @Test
@@ -105,5 +125,32 @@ public class LeagueTest {
         testleague.setCustomLineUp(testleague.getTeams().get(0), testArray);
         assertEquals(testleague.getTeams().get(0).getLineUp().getAanvallers().get(0),testleague.getTeams().get(0).getPlayers().get(0));
     }
+    
+    
+    @Test
+    public void nextRoundTest(){
+        Round test = testleague.nextRound("Speelschema.xml", 5);
+        assertEquals(test.getMatch(2).getHomeTeam(),testleague.getByName("Crystal Palace"));
+    
+        Round testings = testleague.nextRound("Speelschema.xml", 0);
+        assertEquals(testings.getMatch(0).getHomeTeam(),testleague.getByName("Manchester United"));
+    }
+    
+    @Test 
+    public void processResultTest(){
+        int drawsbefore = testleague.getTeams().get(0).getDraws();
+        int winsbefore = testleague.getTeams().get(0).getWins();
+        int lossesbefore = testleague.getTeams().get(0).getWins();
+        //Draw
+        testleague.processResult(testleague.getTeams().get(0), testleague.getTeams().get(1), 0, 0);
+        assertEquals(testleague.getTeams().get(0).getDraws(),drawsbefore+1);
+        //Home won
+        testleague.processResult(testleague.getTeams().get(0), testleague.getTeams().get(1), 1, 0);
+        assertEquals(testleague.getTeams().get(0).getWins(),winsbefore+1);
+        //Away won
+        testleague.processResult(testleague.getTeams().get(0), testleague.getTeams().get(1), 0, 1);
+        assertEquals(testleague.getTeams().get(0).getLosses(),lossesbefore+1);
+    }
+    
     
 }

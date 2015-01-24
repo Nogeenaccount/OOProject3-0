@@ -93,7 +93,23 @@ public class League {
 
         team.setLineUp(l);
     }
-            
+    
+    @Override
+    public boolean equals(Object other){
+        if(other instanceof League){
+            League that = (League)other;
+            if(rounds == that.getRounds()){
+                for(int n=0;n<this.getTeams().size();n++){
+                    if(!teams.get(n).equals(that.getTeams().get(n))){
+                        return false;
+                    }                    
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public static League readResources(String fileName) {
 	try {
 	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -723,15 +739,13 @@ public class League {
             t1.setWinStreak(0);
                 }
         //draw
-        else if(h==a){
+        else{
             t2.setDraws(t2.getDraws()+1);
             t1.setDraws(t1.getDraws()+1);
             t2.setWinStreak(0);
             t1.setWinStreak(0);
         }
-        else{
-            System.out.println("Not a valid result.");
-        }
+        
     }
         
         
@@ -750,6 +764,10 @@ public class League {
         this.lastResult = lastResult;
     }
 
+    
+    public void setTeam(int i, Team t){
+        teams.set(i, t);
+    }
     /**
      * @return the LastResultDetailed
      */
