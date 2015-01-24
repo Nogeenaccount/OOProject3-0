@@ -42,95 +42,8 @@ public class MatchLogic{
 	team2 = t2;
 	score1 = 0;
 	score2 = 0;
-
-
-	/*		t1Offence =  offenceSum(t1);
-	 t1Defence = defenceSum(t1);
-	 t1Endurance = enduranceSum(t1);
-
-	 t2Offence = offenceSum(t2);
-	 t2Defence = defenceSum(t2);
-	 t2Endurance = enduranceSum(t2);*/
     }
 
-   /**
-	 * offenceSum: returns the sum of offence in lineUp
-	 * @param t
-	 * @return S
-	 */
-	public double offenceSum(Team t){
-		double S = 0;
-		for (int i=0; i<t.getDefaultLineUp().getAanvallers().size(); i++){
-			S += t.getDefaultLineUp().getAanvallers().get(i).getOffence();
-		}
-		for (int i=0; i<t.getDefaultLineUp().getMiddenvelders().size(); i++){
-			S += ( t.getDefaultLineUp().getMiddenvelders().get(i).getOffence() )/2;
-		}
-		
-		return S;
-	}
-	
-	/**
-	 * defenceSum: returns the sum of defence in lineUp
-	 * @param t
-	 * @return S
-	 */
-	public double defenceSum(Team t){
-		double S = 0;
-		for (int i=0; i<t.getDefaultLineUp().getVerdedigers().size(); i++){
-			S += t.getDefaultLineUp().getVerdedigers().get(i).getDefence();
-		}
-		for (int i=0; i<t.getDefaultLineUp().getMiddenvelders().size(); i++){
-			S += ( t.getDefaultLineUp().getMiddenvelders().get(i).getDefence() )/2;
-		}
-		S += t.getDefaultLineUp().getKeeper().getDefence(); 
-		
-		return S;
-	}
-
-	/**
-	 * enduranceSum: returns the sum of endurance in lineUp
-	 * @param t
-	 * @return S
-	 */
-	public double enduranceSum(Team t){
-		double S = 0;
-		for (int i=0; i<t.getDefaultLineUp().getAanvallers().size(); i++){
-			S += t.getDefaultLineUp().getAanvallers().get(i).getEndurance();
-		}
-		for (int i=0; i<t.getDefaultLineUp().getVerdedigers().size(); i++){
-			S += t.getDefaultLineUp().getVerdedigers().get(i).getEndurance();
-		}
-		for (int i=0; i<t.getDefaultLineUp().getMiddenvelders().size(); i++){
-			S += t.getDefaultLineUp().getMiddenvelders().get(i).getEndurance();
-		}
-		S += t.getDefaultLineUp().getKeeper().getEndurance(); 
-		
-		return S;
-	}
-
-	/**
-	 * scored: return 1 or 0 depending on chance of scoring of the team
-	 * @param O1
-	 * @param D2
-	 * @param E1
-	 * @param E2
-	 * @param t
-	 * @return
-	 */
-	public boolean scored(double O1, double D2, double E1, double E2, double t) {
-		double P;
-		double a = 700;
-		double b = 0.0006;
-		P = (O1 - D2/2)*Math.pow((E1/E2),(t/a))*b;
-		
-		if (Math.random() < P)
-			return true;
-		else
-			return false;
-	}
-
-    
     
     public Update tickHome(){
             int typ =0;
@@ -145,7 +58,7 @@ public class MatchLogic{
              double p3=0.04; //blessure thuisteam
             
             
-            if(scored(offenceSum(getTeam1()), defenceSum(getTeam2()), enduranceSum(getTeam1()), enduranceSum(getTeam2()), gettCurrent())){
+            if(MatchResult.scored(MatchResult.offenceSum(getTeam1()), MatchResult.defenceSum(getTeam2()), MatchResult.enduranceSum(getTeam1()), MatchResult.enduranceSum(getTeam2()), gettCurrent())==1){
                 int a = (int)(Math.round(Math.random()*1.49));
                 spelert = getTeam1().getDefaultLineUp().getAanvallers().get(a);
                 return new Update(4, spelert, gettCurrent());
@@ -183,7 +96,7 @@ public class MatchLogic{
              double p3=0.05; //blessure uitteam
             
             
-            if(scored(offenceSum(getTeam2()), defenceSum(getTeam1()), enduranceSum(getTeam2()), enduranceSum(getTeam1()), gettCurrent())){
+            if(MatchResult.scored(MatchResult.offenceSum(getTeam2()), MatchResult.defenceSum(getTeam1()), MatchResult.enduranceSum(getTeam2()), MatchResult.enduranceSum(getTeam1()), gettCurrent())==1){
                 int a = (int)(Math.round(Math.random()*3-0.5));
                 spelert = getTeam2().getDefaultLineUp().getAanvallers().get(a);
                 return new Update(4, spelert, gettCurrent());
