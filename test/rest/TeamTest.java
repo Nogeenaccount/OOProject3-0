@@ -229,24 +229,6 @@ public class TeamTest {
     }
 
     
-    /**
-     * test 1, is the budget upgraded?
-     */
-    @Test
-    public void sellPlayerTest() {
-	//test 1, is the budget upgraded?
-	a.add(p1);
-	a.sellPlayer(p1,1);
-	assertTrue(a.getBudget() == 10500);
-
-	//test 2, is the player removed and the list shifted to the left?
-	a.add(p1);
-	a.add(p2);
-	a.sellPlayer(p1,1);
-	assertTrue(a.getPlayers().get(0).equals(p2));
-	
-    }
-    
     @Test
     public void setterTest() {
 	a.setTeamName("Ajax");
