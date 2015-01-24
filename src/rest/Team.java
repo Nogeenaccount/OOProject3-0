@@ -416,9 +416,9 @@ public class Team {
         } while(middenvelders.size()>3);
 
         // eliminatie van mindere aanvallers
-        if(aanvallers.size()< 3){
+        do {
             aanvallers = eliminateWorstPlayer(aanvallers);
-        } 
+        } while(aanvallers.size()>3);
 		
 	l.setAanvallers(aanvallers);
 	l.setMiddenvelders(middenvelders);

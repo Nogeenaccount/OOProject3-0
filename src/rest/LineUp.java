@@ -83,6 +83,25 @@ public class LineUp {
 	}
     }
 
+    @Override
+    public String toString(){
+        String str = "<LineUp>\n  <Aanvallers>\n";
+        for(int i = 0; i<this.getAanvallers().size(); i++){
+            str += "    " + this.getAanvallers().get(i).toString() + "\n";
+        }
+        str += "  </Aanvallers>\n  <Middenvelders>\n";
+        for(int i = 0; i<this.getMiddenvelders().size(); i++){
+            str += "    " + this.getMiddenvelders().get(i).toString() + "\n";
+        }
+        str += "  </Middenvelders>\n  <Verdedigers>\n";       
+        for(int i = 0; i<this.getVerdedigers().size(); i++){
+            str += "    " + this.getVerdedigers().get(i).toString() + "\n";
+        }
+        str += "  </Verdedigers>\n  <Keeper>\n    " + this.getKeeper().toString() + "\n  </Keeper>\n</LineUp>";
+        
+        return str;
+    }
+    
         /**
      * equals: tests if two LineUp instances are equal
      * @param obj
@@ -92,7 +111,38 @@ public class LineUp {
     public boolean equals(Object obj){
         if (obj instanceof LineUp){
             LineUp L = (LineUp) obj;
-            if (this.getAanvallers().equals(L.getAanvallers()) && this.getMiddenvelders().equals(L.getMiddenvelders()) && this.getVerdedigers().equals(L.getVerdedigers()) && this.getKeeper().equals(L.getKeeper()))
+            boolean checkA = false;
+            boolean checkB = false;
+            boolean checkC = false;
+  
+            // check Aanvallers
+            if (this.getAanvallers().size() == L.getAanvallers().size()){
+                checkA=true;
+                for(int i = 0; i<this.getAanvallers().size(); i++){
+                    if (!L.getAanvallers().contains(this.getAanvallers().get(i)))
+                        checkA=false;
+                }
+            }
+            
+            // check Middenvelders
+            if (this.getMiddenvelders().size() == L.getMiddenvelders().size()){
+                checkB=true;
+                for(int i = 0; i<this.getMiddenvelders().size(); i++){
+                    if (!L.getMiddenvelders().contains(this.getMiddenvelders().get(i)))
+                        checkB=false;
+                }
+            }
+            
+            // check Verdedigers
+            if (this.getVerdedigers().size() == L.getVerdedigers().size()){
+                checkC=true;
+                for(int i = 0; i<this.getVerdedigers().size(); i++){
+                    if (!L.getVerdedigers().contains(this.getVerdedigers().get(i)))
+                        checkC=false;
+                } 
+            }
+            
+            if (checkA && checkB && checkC && this.getKeeper().equals(L.getKeeper()))
                 return true;
         }
         return false;

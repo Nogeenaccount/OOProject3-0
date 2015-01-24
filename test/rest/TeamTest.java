@@ -139,15 +139,7 @@ public class TeamTest {
                        !players.contains(p5));
 
         players = Team.eliminateWorstPlayer(players);
-        
-        assertTrue(!players.contains(p1) &&
-                    !players.contains(p2) &&
-                      players.contains(p3) &&
-                       players.contains(p4) &&
-                       !players.contains(p5));
-        
-        players = Team.eliminateWorstPlayer(players);
-        
+                
         assertTrue(!players.contains(p1) &&
                     !players.contains(p2) &&
                       players.contains(p3) &&
@@ -221,13 +213,17 @@ public class TeamTest {
         tempLineUp.addVerdediger(p22);
         tempLineUp.addVerdediger(p13);
         tempLineUp.addVerdediger(p14);
-        tempLineUp.addMiddenvelder(p15);
+        tempLineUp.addVerdediger(p12);        
         tempLineUp.addMiddenvelder(p7);
         tempLineUp.addMiddenvelder(p6);
-        tempLineUp.addMiddenvelder(p4);
-        tempLineUp.addAanvaller(p22);
-        tempLineUp.addAanvaller(p13);
-        tempLineUp.addAanvaller(p19);
+        tempLineUp.addMiddenvelder(p15);
+        tempLineUp.addAanvaller(p11);
+        tempLineUp.addAanvaller(p18);
+        tempLineUp.addAanvaller(p21);
+        
+        
+        System.out.println("Hand Made LineUp:\n" + tempLineUp.toString());
+        System.out.println("DefaultLineUp:\n" + tempTeam.getDefaultLineUp());
         
         assertEquals(tempLineUp, tempTeam.getDefaultLineUp());
     }

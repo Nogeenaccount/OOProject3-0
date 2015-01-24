@@ -8,16 +8,26 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.util.ArrayList;
 import java.util.List;
+
+
 public class ThreadTest implements Runnable {
 
     
     private static JTextArea workSpace;
     private static JButton button;
     
+    /**
+     * Creates a ThreadTest object
+     * @param button2 a JButton which will be enabled  as soon as the run() has completed
+     */
     public ThreadTest(JButton button2) {
         button = button2;
     }
 
+    /**
+     * Running a ThreadTest object allows a string to update itself over the progress of match to textually display what is happening
+     * as well as when the match begins and ends
+     */
     @Override
     public void run() {
         int round = states.StateManager.getLeague().getRounds();
