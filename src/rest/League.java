@@ -73,8 +73,6 @@ public class League {
         }
     }
 
-    //Test
-    //suck a cock
     
     
     
