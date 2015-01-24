@@ -7,6 +7,7 @@ package rest;
 
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +31,28 @@ public class LineUpTest {
 	p3 = new Player("Harry Testema",12,1000000,82,70,60,"verdediger",5,0);
 	p4 = new Player("Harry Testema",12,1000000,83,70,60,"verdediger",5,0);
 	p5 = new Player("Harry Testema",12,1000000,84,70,60,"verdediger",5,0);
+    }
+    
+    @Test
+    public void equalsTest(){
+        LineUp L1 = new LineUp();
+        LineUp L2 = new LineUp();
+        
+        L1.addAanvaller(p1);
+        L1.addMiddenvelder(p2);
+        L1.addVerdediger(p3);
+        L1.setKeeper(p4);
+        
+        L2.addAanvaller(p1);
+        L2.addMiddenvelder(p2);
+        L2.addVerdediger(p3);
+        L2.setKeeper(p4);
+        
+        assertEquals(L1, L2);
+        
+        L2.setKeeper(p5);
+        
+        assertFalse(L1.equals(L2));
     }
     
     @Test
