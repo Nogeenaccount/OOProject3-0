@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  *
  * @author user
  */
-public class MatchResultTest {
+public class MatchLogicTest {
 
     Team team;
     LineUp lineup;
@@ -43,24 +43,33 @@ public class MatchResultTest {
 	team.setLineUp(lineup);
     }
     
+    
+    
+    
     @Test
-    public void testOffenceSum(){
-	assertEquals(150,MatchResult.offenceSum(team),0.1);
+    public void getScoreMethodTest(){
+        boolean pass = false;
+        String str = MatchLogic.getScoreMethod();
+        if(str.equals("a beautiful pass from "               )    ||
+            str.equals("a wonderful solo from who else than " )   ||
+             str.equals("a well taken corner from the foot of ")  ||
+              str.equals("a sharp through ball by "             )  )
+            pass=true;
+        
+        assertTrue(pass);  
     }
     
     @Test
-    public void testDefenceSum(){
-	assertEquals(285,MatchResult.defenceSum(team),0.1);
+    public void randomInjuryTest(){
+        boolean pass = false;
+        String str = MatchLogic.randomInjury();
+        if(str.equals("Broken ankle"        )    ||
+            str.equals("Dislocated shoulder" )   ||
+             str.equals("Strained ligaments"  )  ||
+              str.equals("Torn hamstring"      )  )
+            pass=true;
+        
+        assertTrue(pass);  
     }
     
-    @Test
-    public void testEnduranceSum(){
-	assertEquals(260,MatchResult.enduranceSum(team),0.1);
-    }
-    
-    @Test
-    public void testScored(){
-        assertTrue(MatchResult.scored(1000,0,100,100,0)==1);
-        assertTrue(MatchResult.scored(1000, 2000, 100, 100, 0)==0);
-    }
 }
