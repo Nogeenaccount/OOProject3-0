@@ -24,7 +24,29 @@ public class Match {
         AwayTeam = Away;
         HomeScore=0;
         AwayScore=0;
+    }  
+    
+    @Override
+    public String toString(){
+        return HomeTeam.getTeamName() + " " + HomeScore + "-" + AwayScore + " " + AwayTeam.getTeamName();
     }
+    
+    public String Fixture(){
+        return HomeTeam + " - " + AwayTeam;
+    }
+    
+    @Override
+    public boolean equals(Object other){
+        if(other instanceof Match){
+            Match that = (Match)other;
+            if(this.HomeTeam.equals(that.getHomeTeam()) && this.AwayTeam.equals(that.getAwayTeam())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    // getters/setters
     
     public void setHomeTeam(Team a){
         HomeTeam = a;
@@ -58,22 +80,4 @@ public class Match {
         return AwayScore;
     }
     
-    public String toString(){
-        return HomeTeam.getTeamName() + " " + HomeScore + "-" + AwayScore + " " + AwayTeam.getTeamName();
-    }
-    
-    public String Fixture(){
-        return HomeTeam + " - " + AwayTeam;
-    }
-    
-    public boolean equals(Object other){
-        if(other instanceof Match){
-            Match that = (Match)other;
-            if(this.HomeTeam.equals(that.getHomeTeam()) && this.AwayTeam.equals(that.getAwayTeam())){
-                return true;
-            }
-        }
-        return false;
-    }
-        
 }

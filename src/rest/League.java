@@ -43,6 +43,10 @@ public class League {
 	this.chosenTeam = chosenTeam;
     }
 
+    /**
+     * Adds a team to a league if the team isn't already in the league
+     * @param team the team to be added
+     */
     public void add(Team team) {
 	if (!teams.contains(team)) {
 	    teams.add(team);
@@ -50,12 +54,10 @@ public class League {
     }
 
     /**
-     * readResources: reads data out of resource XML file
-     *
-     * @param filename name of to-be-read file
-     * @return League league
-     */
-    
+     * Finds the team object belonging to the given name
+     * @param teamname the name of the team (String)
+     * @return Team the team object
+     */    
     public Team getByName(String teamname){
         Team t = new Team("","",0);
         for(int i = 0; i<teams.size(); i++){
@@ -66,6 +68,9 @@ public class League {
         return t;
     }
     
+    /**
+     * Resets the league: sets the amount of rounds to 0 and resets all teamstats
+     */
     public void roundsReset(){
         this.rounds=38;
         for(int i =0 ; i< this.getTeams().size(); i++){
@@ -76,7 +81,11 @@ public class League {
     
     
     
-    
+    /**
+     * 
+     * @param team
+     * @param players 
+     */
     public static void setCustomLineUp(Team team, String[] players) {
         LineUp l = new LineUp();
         l.addAanvaller(team.getPlayerByName(players[0]));
@@ -94,6 +103,11 @@ public class League {
         team.setLineUp(l);
     }
     
+    /**
+     * Compares a league object to another object
+     * @param other an object
+     * @return true if the object is a league and equal to the current league, false if otherwise
+     */
     @Override
     public boolean equals(Object other){
         if(other instanceof League){
@@ -110,6 +124,11 @@ public class League {
         return false;
     }
     
+    /**
+     * Reads an XML file and converts it to a league object
+     * @param fileName the name of the file
+     * @return a league object
+     */
     public static League readResources(String fileName) {
 	try {
 	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -200,6 +219,12 @@ public class League {
 	return new League("", 0, "", "");
     }
     
+    /**
+     * Reads a xml file and retrieves a certain round from the fixtures list
+     * @param fileName the name of the xml file
+     * @param ronde the number of the round
+     * @return a round object
+     */
     public Round nextRound(String fileName, int ronde) {
         if(ronde == 0){
             this.roundsReset();

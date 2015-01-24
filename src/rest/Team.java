@@ -446,6 +446,9 @@ public class Team {
         }
             
         
+        
+    // getters/setters
+        
     public String getTeamName() {
 	return teamName;
     }
