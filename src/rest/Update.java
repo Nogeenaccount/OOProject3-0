@@ -21,6 +21,31 @@ public class Update {
     }
 
     /**
+     * toString: returns String of Update
+     * @return String
+     */
+    @Override
+    public String toString(){
+        return "<Update("+type+", "+speler.toString()+", "+minuut+")>";
+    }
+    
+    /**
+     * checks if to Update instances are equal
+     * @param obj Object
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object obj){
+        if (obj instanceof Update){
+            Update u = (Update) obj;
+            return (u.getType()==this.getType() && u.getSpeler().equals(this.getSpeler()) && u.getMinuut()==this.getMinuut());
+        }
+        return false;
+    }
+    
+    // getters/setters
+    
+    /**
      * @return the type
      */
     public int getType() {

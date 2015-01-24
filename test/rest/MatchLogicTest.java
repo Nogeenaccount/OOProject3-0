@@ -31,10 +31,20 @@ public class MatchLogicTest {
 	team1 = new Team("Chelsea", "Arena", 10000);
 	team2 = new Team("Manchester", "idk", 11000);
         
-	p1 = new Player("p1", 1, 500, 10, 20, 30, "gk", 0, 0);
-	p2 = new Player("p2", 2, 500, 20, 30, 40, "gk", 0, 0);
-	p3 = new Player("p3", 3, 500, 30, 40, 50, "gk", 0, 0);
-	p4 = new Player("p3", 3, 500, 40, 50, 60, "gk", 0, 0);
+	p1 = new Player("p1", 1, 500, 10, 20, 30, "F", 0, 0);
+	p2 = new Player("p2", 2, 500, 20, 30, 40, "M", 0, 0);
+	p3 = new Player("p3", 3, 500, 30, 40, 50, "D", 0, 0);
+	p4 = new Player("p3", 3, 500, 40, 50, 60, "G", 0, 0);
+        
+        team1.add(p1);
+        team1.add(p2);
+        team1.add(p3);
+        team1.add(p4);
+        team2.add(p1);
+        team2.add(p2);
+        team2.add(p3);
+        team2.add(p4);
+        
 	lineup = new LineUp();
 	lineup.addAanvaller(p1);
 	lineup.addAanvaller(p2);
@@ -109,6 +119,42 @@ public class MatchLogicTest {
         assertTrue(pass);
     }
     
+    @Test
+    public void findOwnMatchTest(){
+        League testLeague = League.readResources("ResourceV6.xml");
+        states.StateManager.setLeague(testLeague);
+        states.StateManager.getLeague().setChosenTeam("Chelsea");
+
+        Match testMatch = new Match(states.StateManager.getLeague().getTeamByString("Burnley"), states.StateManager.getLeague().getTeamByString("Chelsea"));
+        
+        //System.out.println(testMatch.toString());
+        //System.out.println(MatchLogic.findOwnMatch(0).toString());
+        
+        assertEquals(MatchLogic.findOwnMatch(0), testMatch);
+    }
+    
+    @Test
+    public void tickHomeTest(){
+        MatchLogic m = new MatchLogic(35, team1, team2);
+        Update uT = m.tickHome();
+        //System.out.println(uT.toString());
+        Update uM = new Update(0, p1, 2);
+        
+        boolean pass = false;
+        
+        for(int i = 0; i<3; i++){
+            for(int p = 0; p<3; p++){
+                uM.setType(i);
+                uM.setSpeler(team1.getPlayers().get(p));
+                
+                //System.out.println(uM.toString());
+
+                if(uM.equals(uT))
+                    pass = true;
+            }
+        }
+        assertTrue(pass);
+    }
     
     @Test
     public void getScoreMethodTest(){
