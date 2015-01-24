@@ -222,8 +222,8 @@ public class TeamTest {
         tempLineUp.addAanvaller(p21);
         
         
-        System.out.println("Hand Made LineUp:\n" + tempLineUp.toString());
-        System.out.println("DefaultLineUp:\n" + tempTeam.getDefaultLineUp());
+        //System.out.println("Hand Made LineUp:\n" + tempLineUp.toString());
+        //System.out.println("DefaultLineUp:\n" + tempTeam.getDefaultLineUp());
         
         assertEquals(tempLineUp, tempTeam.getDefaultLineUp());
     }
