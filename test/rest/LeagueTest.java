@@ -162,7 +162,7 @@ public class LeagueTest {
     @Test
     public void TransferTest1() {
         String soortTransactie = "Buy";
-        String offerFormat = "Chelsea 15000000 Eden Hazard";
+        String offerFormat = "Chelsea 35000000 Eden Hazard";
         assertTrue(testleague.Transfer(soortTransactie, offerFormat));
               
     }
