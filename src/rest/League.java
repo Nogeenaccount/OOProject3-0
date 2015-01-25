@@ -656,7 +656,7 @@ public class League {
                         return true;
                     }
 		}
-                else if (soortTransactie.equalsIgnoreCase("sell")) {
+                if (soortTransactie.equalsIgnoreCase("sell")) {
                     Player player = this.chosenTeam().getPlayerByName(playerName);
                     System.out.println("Check name:" + player);
                     if (League.acceptOffer(bod, player) == false && team.getBudget() >= bod && this.chosenTeam().affordToSell(player)) {

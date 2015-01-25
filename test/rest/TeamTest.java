@@ -259,5 +259,14 @@ public class TeamTest {
 	assertEquals(a.getGoalsAgainst(),7);
 	assertEquals(a.getGoalDifference(),-1);
     }
+    
+    @Test
+    public void sellPlayerTest() {
+        League testleague = League.readResources("resourceV6.xml");
+        testleague.setChosenTeam("Arsenal");
+        assertFalse(testleague.chosenTeam().sellPlayer(p1, 0));
+        
+        
+    }
 
 }

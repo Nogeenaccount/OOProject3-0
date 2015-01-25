@@ -204,6 +204,9 @@ public class LeagueTest {
     String soortTransactie = "Buy";
     String offerFormat = "Crystal Palace 123500000 Scott Dann";
     assertFalse(testleague.Transfer(soortTransactie, offerFormat));
+    String offerFormat2 = "Crystal Palace -123500000 Scott Dann";
+    assertFalse(testleague.Transfer(soortTransactie, offerFormat2));
+    
     
 }
     
