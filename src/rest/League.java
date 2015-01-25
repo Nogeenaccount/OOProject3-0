@@ -43,6 +43,10 @@ public class League {
 	this.chosenTeam = chosenTeam;
     }
 
+    /**
+     * Adds a team to a league if the team isn't already in the league
+     * @param team the team to be added
+     */
     public void add(Team team) {
 	if (!teams.contains(team)) {
 	    teams.add(team);
@@ -50,12 +54,10 @@ public class League {
     }
 
     /**
-     * readResources: reads data out of resource XML file
-     *
-     * @param filename name of to-be-read file
-     * @return League league
-     */
-    
+     * Finds the team object belonging to the given name
+     * @param teamname the name of the team (String)
+     * @return Team the team object
+     */    
     public Team getByName(String teamname){
         Team t = new Team("","",0);
         for(int i = 0; i<teams.size(); i++){
@@ -66,6 +68,9 @@ public class League {
         return t;
     }
     
+    /**
+     * Resets the league: sets the amount of rounds to 0 and resets all teamstats
+     */
     public void roundsReset(){
         this.rounds=38;
         for(int i =0 ; i< this.getTeams().size(); i++){
@@ -76,7 +81,11 @@ public class League {
     
     
     
-    
+    /**
+     * 
+     * @param team
+     * @param players 
+     */
     public static void setCustomLineUp(Team team, String[] players) {
         LineUp l = new LineUp();
         l.addAanvaller(team.getPlayerByName(players[0]));
@@ -93,7 +102,33 @@ public class League {
 
         team.setLineUp(l);
     }
-            
+    
+    /**
+     * Compares a league object to another object
+     * @param other an object
+     * @return true if the object is a league and equal to the current league, false if otherwise
+     */
+    @Override
+    public boolean equals(Object other){
+        if(other instanceof League){
+            League that = (League)other;
+            if(rounds == that.getRounds()){
+                for(int n=0;n<this.getTeams().size();n++){
+                    if(!teams.get(n).equals(that.getTeams().get(n))){
+                        return false;
+                    }                    
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Reads an XML file and converts it to a league object
+     * @param fileName the name of the file
+     * @return a league object
+     */
     public static League readResources(String fileName) {
 	try {
 	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -184,6 +219,12 @@ public class League {
 	return new League("", 0, "", "");
     }
     
+    /**
+     * Reads a xml file and retrieves a certain round from the fixtures list
+     * @param fileName the name of the xml file
+     * @param ronde the number of the round
+     * @return a round object
+     */
     public Round nextRound(String fileName, int ronde) {
         if(ronde == 0){
             this.roundsReset();
@@ -484,56 +525,36 @@ public class League {
 	public static boolean acceptOffer(int bod, Player x) {
 
 		int price = x.getPrice();
-
-		if (bod == price) {
-			if (Math.random() > 0.5) {
-                            System.out.println("case1");
-				return true;
-			}
-
-		} else if (bod < price && bod > 0.8 * price) {
-			if (Math.random() > 0.7) {
-                            System.out.println("case2");
-
-				return true;
-			}
-		} else if (bod > price && bod < 1.25 * price) {
-			if (Math.random() > 0.3) {
-                            System.out.println("case3");
-				return true;
-			}
-		} else if (bod > 1.25 * price) {
-                    System.out.println("case4");
-			return true;
+//
+//		if (bod == price) {
+//			if (Math.random() > 0.5) {
+//                            System.out.println("case1");
+//				return true;
+//			}
+//
+//		} else if (bod < price && bod > 0.8 * price) {
+//			if (Math.random() > 0.7) {
+//                            System.out.println("case2");
+//
+//				return true;
+//			}
+//		} else if (bod > price && bod < 1.25 * price) {
+//			if (Math.random() > 0.3) {
+//                            System.out.println("case3");
+//				return true;
+//			}
+//		} else if (bod > 1.25 * price) {
+ //                   System.out.println("case4");
+//			return true;
+//		}
+		
+		//uses the nicely asymptotic function 1-1/2x
+                		if (price>0 && Math.random() < (1-(1/((float)2*(bod/price))))) {
+		    System.out.println("case1");
+		    return true;
 		}
 		return false;
 
-	}
-        
-        public static boolean acceptOffer2(int bod, Player x) {
-
-		int price = x.getPrice();
-
-		if (bod == price) {
-                        if (Math.random() > 0.5) {
-                            System.out.println("case3");
-                            return true;
-			}
-		} else if (bod < price && bod > 0.8 * price) {
-                        if (Math.random() > 0.3) {
-                            System.out.println("case2");
-                            return true;
-			}
-		} else if (bod > price && bod < 1.25 * price) {
-			if (Math.random() > 0.7) {
-                            System.out.println("case1");
-                            return true;
-                        }
-		} else if (bod > 1.25 * price) {
-                        System.out.println("case2");
-                        return false;
-		}
-		return true;
 	}
 
         /**
@@ -604,30 +625,27 @@ public class League {
          */
         public boolean Transfer(String soortTransactie, String offerFormat) {
             Scanner sc = new Scanner(offerFormat);
-            
+            System.out.println("beginning of transfer");
             String team1 = sc.next();
-            if (sc.hasNextInt() == false) {
+            while (sc.hasNextInt() == false) {
                 team1 = team1 + " " + sc.next();
             }
-            if (sc.hasNextInt() == false) {
-                team1 = team1 + " " + sc.next();
-            }
+           
             System.out.println("Team:" + team1);
             
             int bod = sc.nextInt();
             System.out.println("Price:" + bod);
             
             String playerName = sc.next();
-            if (sc.hasNext() == true) {
+            while (sc.hasNext() == true) {
                 playerName = playerName + " " + sc.next();
             }
-            if (sc.hasNext() == true) {
-                playerName = playerName + " " + sc.next();
-            }
+            
             System.out.println("|"+playerName+"|");
             
             Team team = this.getTeamByString(team1);
             System.out.println(team.getTeamName());
+            System.out.println("chosen team" + this.chosenTeam().getTeamName());
                         
 		if (soortTransactie.equalsIgnoreCase("buy")) {
                     Player player = team.getPlayerByName(playerName);
@@ -641,7 +659,7 @@ public class League {
                 else if (soortTransactie.equalsIgnoreCase("sell")) {
                     Player player = this.chosenTeam().getPlayerByName(playerName);
                     System.out.println("Check name:" + player);
-                    if (League.acceptOffer2(bod, player) == true && team.getBudget() >= bod && this.chosenTeam().affordToSell(player)) {
+                    if (League.acceptOffer(bod, player) == false && team.getBudget() >= bod && this.chosenTeam().affordToSell(player)) {
                         //I would write an acceptOffer for selling player (polar opposite of for buying players)
 			this.chosenTeam().sellPlayer(player, bod);
 			team.buyPlayer(player, bod);
@@ -657,12 +675,10 @@ public class League {
             
             //Team
             String team1 = sc.next();
-            if (sc.hasNextInt() == false) {
+            while (sc.hasNextInt() == false) {
                 team1 = team1 + " " + sc.next();
             }
-            if (sc.hasNextInt() == false) {
-                team1 = team1 + " " + sc.next();
-            }
+            
             System.out.println("Team:" + team1);
             
             //Price
@@ -671,12 +687,10 @@ public class League {
             
             //Player
             String playerName = sc.next();
-            if (sc.hasNext() == true) {
+            while (sc.hasNext() == true) {
                 playerName = playerName + " " + sc.next();
             }
-            if (sc.hasNext() == true) {
-                playerName = playerName + " " + sc.next();
-            }
+           
             System.out.println("|"+playerName+"|");
             
             //Team verification by name
@@ -723,15 +737,13 @@ public class League {
             t1.setWinStreak(0);
                 }
         //draw
-        else if(h==a){
+        else{
             t2.setDraws(t2.getDraws()+1);
             t1.setDraws(t1.getDraws()+1);
             t2.setWinStreak(0);
             t1.setWinStreak(0);
         }
-        else{
-            System.out.println("Not a valid result.");
-        }
+        
     }
         
         
@@ -750,6 +762,10 @@ public class League {
         this.lastResult = lastResult;
     }
 
+    
+    public void setTeam(int i, Team t){
+        teams.set(i, t);
+    }
     /**
      * @return the LastResultDetailed
      */
