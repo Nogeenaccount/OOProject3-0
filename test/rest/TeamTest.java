@@ -1,5 +1,6 @@
 package rest;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -221,7 +222,8 @@ public class TeamTest {
         
         //System.out.println("Hand Made LineUp:\n" + tempLineUp.toString());
         //System.out.println("DefaultLineUp:\n" + tempTeam.getDefaultLineUp());
-        
+        System.out.println(tempLineUp);
+        System.out.println(tempTeam.getDefaultLineUp());
         assertEquals(tempLineUp, tempTeam.getDefaultLineUp());
     }
 
@@ -258,7 +260,7 @@ public class TeamTest {
     }
     
     @Test
-    public void sellPlayerTest() {
+    public void sellPlayerTest() throws FileNotFoundException {
         League testleague = League.readResources("resourceV6.xml");
         testleague.setChosenTeam("Arsenal");
         assertFalse(testleague.chosenTeam().sellPlayer(p1, 0));

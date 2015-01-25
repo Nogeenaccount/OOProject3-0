@@ -5,6 +5,7 @@
  */
 package rest;
 
+import java.io.FileNotFoundException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -120,7 +121,7 @@ public class MatchLogicTest {
     }
     
     @Test
-    public void findOwnMatchTest(){
+    public void findOwnMatchTest() throws FileNotFoundException{
         League testLeague = League.readResources("ResourceV6.xml");
         states.StateManager.setLeague(testLeague);
         states.StateManager.getLeague().setChosenTeam("Chelsea");
@@ -153,6 +154,7 @@ public class MatchLogicTest {
                     pass = true;
             }
         }
+        
         assertTrue(pass);
     }
     

@@ -5,6 +5,7 @@
  */
 package rest;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
@@ -19,16 +20,20 @@ import org.junit.Test;
  */
 public class LeagueTest {
     League testleague;
+    String OfferFormat;
     
     @Before
-    public void before(){
+    public void before() throws FileNotFoundException{
 	testleague = League.readResources("resourceV6.xml");
         testleague.setChosenTeam("Arsenal");
+        OfferFormat = "";
+        testleague.getByName(testleague.getChosenTeam()).setBudget(Integer.MAX_VALUE-100000000);
+        
 //	assertTrue(League.readResources("resourceV6.xml").equals(testleague));
     }
     
     @Test
-    public void readTest() {
+    public void readTest() throws FileNotFoundException {
 	assertEquals(testleague.getLeagueName(), "Barclays Premier League");
 	assertEquals(testleague.getRounds(), 38);
 	assertEquals(testleague.getTeams().size(), 20);
@@ -48,8 +53,8 @@ public class LeagueTest {
     }
     
     @Test
-    public void writeTest() {
-	testleague.writeToXML("resourceV6.xml");
+    public void writeTest() throws FileNotFoundException {
+	testleague.writeToXML("TestSaveGame.xml");
 	readTest();
     }
     
@@ -162,12 +167,14 @@ public class LeagueTest {
               
     }
     
+   
     @Test
     public void TransferTest2() {
     String soortTransactie = "Buy";
-    String offerFormat = "Crystal Palace 15000000 Scott Dann";
+    String offerFormat = "Crystal Palace 35000000 Barry Bannan";
     assertTrue(testleague.Transfer(soortTransactie, offerFormat));
 }
+
     @Test
        public void TransferTest3() {
         String soortTransactie = "Buy";
@@ -202,12 +209,10 @@ public class LeagueTest {
     
     @Test
     public void TransferTest5() {
-    String soortTransactie = "Buy";
-    String offerFormat = "Crystal Palace 123500000 Scott Dann";
+    String soortTransactie = "buy";
+    String offerFormat = "Crystal Palace 123500 Scott Dann";
     assertFalse(testleague.Transfer(soortTransactie, offerFormat));
-    String offerFormat2 = "Crystal Palace -123500000 Scott Dann";
-    assertFalse(testleague.Transfer(soortTransactie, offerFormat2));
-}
+ }
     @Test
     public void generateOfferTest() {
         String testOffer = testleague.generateOffer();

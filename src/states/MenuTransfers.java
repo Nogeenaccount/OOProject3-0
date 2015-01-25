@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ public class MenuTransfers extends State {
 	JTextField playerPrompt = new JTextField();
 	JTextField attemptPricePrompt = new JTextField();
 	JList buyOrSellList = new JList(GivebuyOrSellList());
-	JList teamList = new JList(GiveteamList());
+	JList teamList;
 	JTextField attemptPrice = new JTextField();
 	JButton buttonAttempt = new JButton(new ImageIcon(buttonAttemptImage));
 	JList offerList = new JList(GiveofferList());;
@@ -49,7 +50,8 @@ public class MenuTransfers extends State {
         ArrayList<String> alreadyTried = new ArrayList(); //Stores player names for buy/sell
         ArrayList<String> tempOffersTried = new ArrayList ();
         
-    public MenuTransfers() {
+    public MenuTransfers() throws FileNotFoundException {
+        this.teamList = new JList(GiveteamList());
     }
 
     @Override @SuppressWarnings({"rawtypes", "unchecked"})
@@ -476,7 +478,7 @@ public class MenuTransfers extends State {
         return buyOrSell;
     }
     
-    public String[] GiveteamList() {
+    public String[] GiveteamList() throws FileNotFoundException {
         String[] teamList = new String[20];
 	rest.League league = rest.League.readResources("SaveGame.xml");
 	for (int i = 0; i < league.getTeams().size(); i++) {

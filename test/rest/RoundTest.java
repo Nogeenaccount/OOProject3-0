@@ -1,5 +1,6 @@
 package rest;
 
+import java.io.FileNotFoundException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -9,7 +10,11 @@ import static org.junit.Assert.*;
 
 public class RoundTest {
     
-    League testLeague = League.readResources("resourceV6.xml");
+    League testLeague;
+
+    public RoundTest() throws FileNotFoundException {
+        this.testLeague = League.readResources("resourceV6.xml");
+    }
     
     @Test
     public void getMatchTest(){

@@ -5,6 +5,7 @@
  */
 package rest;
 
+import java.io.FileNotFoundException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,9 +18,13 @@ import static org.junit.Assert.*;
  * @author user
  */
 public class MatchResultTest {
-    League testLeague = League.readResources("resourceV6.xml");
+    League testLeague;
     Team team;
     LineUp lineup;
+
+    public MatchResultTest() throws FileNotFoundException {
+        this.testLeague = League.readResources("resourceV6.xml");
+    }
     
     @Before
     public void before(){

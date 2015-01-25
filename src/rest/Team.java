@@ -206,7 +206,7 @@ public class Team {
             if(q instanceof Player){
             return q;
             }else{
-                System.out.println("huh");
+                System.out.println("Selecting on shirt number not succeeded");
                 return null;
             }
         }
@@ -423,10 +423,11 @@ public class Team {
         } while(middenvelders.size()>3);
 
         // eliminatie van mindere aanvallers
-        //do while loop is not working properly, please do not remove if consturction. Bart
-        if(aanvallers.size() > 3) {
+        //do while loop is not working properly, please do not remove this while loop. Bart
+        while(aanvallers.size() > 3) {
             aanvallers = eliminateWorstPlayer(aanvallers);
         } 
+    
 		
 	l.setAanvallers(aanvallers);
 	l.setMiddenvelders(middenvelders);

@@ -1,6 +1,7 @@
 package rest;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -128,56 +129,58 @@ public class League {
      * Reads an XML file and converts it to a league object
      * @param fileName the name of the file
      * @return a league object
+     * @throws java.io.FileNotFoundException
      */
-    public static League readResources(String fileName) {
-	try {
-	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	    DocumentBuilder db = dbf.newDocumentBuilder();
-	    Document doc = db.parse(new File(fileName));
-	    doc.getDocumentElement().normalize();
-	    NodeList leagueList = doc.getElementsByTagName("league");
-	    Node lNode = leagueList.item(0);
-	    Element lElement = (Element) lNode;
-
-	    //NEW Get attributes
-	    String leagueName = lElement.getAttribute("name");
-	    int rounds = Integer.parseInt(lElement.getElementsByTagName("matchesLeft").item(0).getTextContent());
-	    String gameName = lElement.getElementsByTagName("gameName").item(0).getTextContent();
-	    String chosenTeam = lElement.getElementsByTagName("chosenTeam").item(0).getTextContent();
+    public static League readResources(String fileName)  throws FileNotFoundException{
+	
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(new File(fileName));
+            doc.getDocumentElement().normalize();
+            NodeList leagueList = doc.getElementsByTagName("league");
+            Node lNode = leagueList.item(0);
+            Element lElement = (Element) lNode;
+            
+            //NEW Get attributes
+            String leagueName = lElement.getAttribute("name");
+            int rounds = Integer.parseInt(lElement.getElementsByTagName("matchesLeft").item(0).getTextContent());
+            String gameName = lElement.getElementsByTagName("gameName").item(0).getTextContent();
+            String chosenTeam = lElement.getElementsByTagName("chosenTeam").item(0).getTextContent();
             String lastResult = lElement.getElementsByTagName("lastResult").item(0).getTextContent();
-	    League league = new League(leagueName, rounds, gameName, chosenTeam);
+            League league = new League(leagueName, rounds, gameName, chosenTeam);
             league.setLastResult(lastResult);
-	    NodeList teamList = doc.getElementsByTagName("team");
-	    NodeList playerlistxml = doc.getElementsByTagName("player");
-	    // predefine variables
-	    Node tNode;
-	    Element tElement;
-	    String teamName;
-	    String stadiumName;
-	    int budget;
-	    Team team;
+            NodeList teamList = doc.getElementsByTagName("team");
+            NodeList playerlistxml = doc.getElementsByTagName("player");
+            // predefine variables
+            Node tNode;
+            Element tElement;
+            String teamName;
+            String stadiumName;
+            int budget;
+            Team team;
             LineUp lu;
-	    Node pNode;
-	    Element pElement;
-	    String playerName;
+            Node pNode;
+            Element pElement;
+            String playerName;
             String lineUpString;
-	    int number;
-	    int price;
-	    int end;
-	    int off;
-	    int def;
+            int number;
+            int price;
+            int end;
+            int off;
+            int def;
             int wins; int draws; int losses; int goalsMade; int goalsAgainst; int goalsDiffrence; int winStreak;
-	    String pos;
-	    Player player;
-	    int cc;
-	    int inj;
-	    int c = 0;
-	    for (int i = 0; i < teamList.getLength(); i++) {
-		tNode = teamList.item(i);
-		tElement = (Element) tNode;
-		teamName = tElement.getAttribute("name");
-		stadiumName = tElement.getElementsByTagName("stadiumName").item(0).getTextContent();
-		budget = Integer.parseInt(tElement.getElementsByTagName("budget").item(0).getTextContent());
+            String pos;
+            Player player;
+            int cc;
+            int inj;
+            int c = 0;
+            for (int i = 0; i < teamList.getLength(); i++) {
+                tNode = teamList.item(i);
+                tElement = (Element) tNode;
+                teamName = tElement.getAttribute("name");
+                stadiumName = tElement.getElementsByTagName("stadiumName").item(0).getTextContent();
+                budget = Integer.parseInt(tElement.getElementsByTagName("budget").item(0).getTextContent());
                 wins = Integer.parseInt(tElement.getElementsByTagName("wins").item(0).getTextContent());
                 draws = Integer.parseInt(tElement.getElementsByTagName("draws").item(0).getTextContent());
                 losses = Integer.parseInt(tElement.getElementsByTagName("losses").item(0).getTextContent());
@@ -186,36 +189,42 @@ public class League {
                 goalsDiffrence = Integer.parseInt(tElement.getElementsByTagName("goalsDifference").item(0).getTextContent());
                 winStreak = Integer.parseInt(tElement.getElementsByTagName("winStreak").item(0).getTextContent());
                 lineUpString = tElement.getElementsByTagName("lineUp").item(0).getTextContent();
-		team = new Team(teamName, stadiumName, budget);
+                team = new Team(teamName, stadiumName, budget);
                 team.setWins(wins);team.setDraws(draws);team.setLosses(losses);team.setGoalsMade(goalsMade);team.setGoalsAgainst(goalsAgainst);
                 int j = tElement.getElementsByTagName("player").getLength();
-		for (int p = c; p < (c + j); p++) {
-		    pNode = playerlistxml.item(p);
-		    pElement = (Element) pNode;
-		    playerName = pElement.getAttribute("name");
-		    number = Integer.parseInt(pElement.getElementsByTagName("shirtNumber").item(0).getTextContent());
-		    price = Integer.parseInt(pElement.getElementsByTagName("price").item(0).getTextContent());
-		    end = Integer.parseInt(pElement.getElementsByTagName("endurance").item(0).getTextContent());
-		    off = Integer.parseInt(pElement.getElementsByTagName("offence").item(0).getTextContent());
-		    def = Integer.parseInt(pElement.getElementsByTagName("defence").item(0).getTextContent());
-		    pos = pElement.getElementsByTagName("pos").item(0).getTextContent();
-		    cc = Integer.parseInt(pElement.getElementsByTagName("cardCount").item(0).getTextContent());
-		    inj = Integer.parseInt(pElement.getElementsByTagName("injured").item(0).getTextContent());
-		    player = new Player(playerName, number, price, end, off, def, pos, cc, inj);
-		    team.add(player);
-		}
-		c += j;
+                for (int p = c; p < (c + j); p++) {
+                    pNode = playerlistxml.item(p);
+                    pElement = (Element) pNode;
+                    playerName = pElement.getAttribute("name");
+                    number = Integer.parseInt(pElement.getElementsByTagName("shirtNumber").item(0).getTextContent());
+                    price = Integer.parseInt(pElement.getElementsByTagName("price").item(0).getTextContent());
+                    end = Integer.parseInt(pElement.getElementsByTagName("endurance").item(0).getTextContent());
+                    off = Integer.parseInt(pElement.getElementsByTagName("offence").item(0).getTextContent());
+                    def = Integer.parseInt(pElement.getElementsByTagName("defence").item(0).getTextContent());
+                    pos = pElement.getElementsByTagName("pos").item(0).getTextContent();
+                    cc = Integer.parseInt(pElement.getElementsByTagName("cardCount").item(0).getTextContent());
+                    inj = Integer.parseInt(pElement.getElementsByTagName("injured").item(0).getTextContent());
+                    player = new Player(playerName, number, price, end, off, def, pos, cc, inj);
+                    team.add(player);
+                }
+                c += j;
                 lu = team.convertToLineUp(lineUpString);
                 team.setLineUp(lu);
-		league.add(team);
-
-	    }
-	    System.out.println("Read file: " + fileName);
-	    return league;
-	} catch (Exception e) {
-	    e.printStackTrace();
-
-	}
+                league.add(team);
+                
+            }
+            System.out.println("Read file: " + fileName);
+            return league;
+        } catch (SAXException ex) {
+        
+        } catch (IOException ex) {
+           
+        System.out.println("unfortuneately the path you submitted could not be found, please contact the authors of the game");
+	return new League("", 0, "", "");
+	} catch (ParserConfigurationException ex) {
+        
+        }
+      
 	return new League("", 0, "", "");
     }
     

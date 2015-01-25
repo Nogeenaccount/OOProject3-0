@@ -17,10 +17,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
@@ -77,7 +80,11 @@ public class MenuMain extends State {
         buttonContinue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StateManager.setLeague(League.readResources("SaveGame.xml"));;
+                try {
+                    StateManager.setLeague(League.readResources("SaveGame.xml"));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         

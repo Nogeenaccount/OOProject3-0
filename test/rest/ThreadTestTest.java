@@ -5,6 +5,7 @@
  */
 package rest;
 
+import java.io.FileNotFoundException;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import org.junit.*;
@@ -19,14 +20,14 @@ public class ThreadTestTest {
     Thread preThread = new Thread(new ThreadTest(preButton));
     
     @Before
-    public void runBeforeEveryTest() {
+    public void runBeforeEveryTest() throws FileNotFoundException {
         //threadTest is the resource file + altered teamname/gamename
 	states.StateManager.setLeague(rest.League.readResources("threadTest.xml"));
         rest.ThreadTest.setWorkSpace(new JTextArea());
     }
     
     @After
-    public void runAfterEveryTest() {
+    public void runAfterEveryTest() throws FileNotFoundException {
         states.StateManager.setLeague(rest.League.readResources("threadTest.xml"));
         rest.ThreadTest.setWorkSpace(new JTextArea());
     }

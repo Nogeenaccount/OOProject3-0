@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -55,70 +57,74 @@ public class MenuNew extends State {
     }
     
     public void createGUI() {
-        layout = new GridBagLayout();
-        this.setLayout(layout);
-        c = new GridBagConstraints();
-        
-        //Initialise
-        String[] array1 = new String[20];
-        rest.League league1 = rest.League.readResources("ResourceV6.xml");
-        for (int i = 0; i < league1.getTeams().size(); i++) {
-            array1[i] = league1.getTeams().get(i).getTeamName();
-        }
-        
-        createSpace();
-        
-        //Prompt name
-        c.gridx = 2;
-        c.gridy = 3;
-        createLabel(gameName,"",c,layout);
-        
-        //Enter your name
-        c.gridx = 2;
-        c.gridy = 4;
-        createInput(input,c,layout);
-        
-        //Prompt team
-        c.gridx = 2;
-        c.gridy = 5;
-        createLabel(teamName,"",c,layout);
-        
-        //Team list
-        teamList = new JList(array1);
-        teamList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        teamList.setVisibleRowCount(-1);
-        teamList.setBackground(Color.decode("#525151"));
-        teamList.setForeground(Color.white);
-        JScrollPane teamScroller = new JScrollPane(teamList);
-        teamScroller.setPreferredSize(new Dimension(400, 200));
-        teamScroller.setMinimumSize(new Dimension(400, 200));
-        c.gridx = 2;
-        c.gridy = 6;
-        layout.setConstraints(teamScroller, c);
-        this.add(teamScroller);
-        teamList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                enableButtons();
+        try {
+            layout = new GridBagLayout();
+            this.setLayout(layout);
+            c = new GridBagConstraints();
+            
+            //Initialise
+            String[] array1 = new String[20];
+            rest.League league1 = rest.League.readResources("ResourceV6.xml");
+            for (int i = 0; i < league1.getTeams().size(); i++) {
+                array1[i] = league1.getTeams().get(i).getTeamName();
             }
-        });
-        
-        //Advance
-        c.weightx = 0.5;
-        c.gridx = 2;
-        c.gridy = 7;
-        createButton(buttonAdvance, "", c, layout);
-        attachStateChanger(buttonAdvance, new MenuBetweenRounds());
-        advance();
-        
-        //Go back
-        c.weightx = 0.5;
-        c.gridx = 2;
-        c.gridy = 8;
-        createButton(buttonBack, "", c, layout);
-        attachStateChanger(buttonBack, new MenuMain());
-	
-	setBackground(panelPanelImage);
+            
+            createSpace();
+            
+            //Prompt name
+            c.gridx = 2;
+            c.gridy = 3;
+            createLabel(gameName,"",c,layout);
+            
+            //Enter your name
+            c.gridx = 2;
+            c.gridy = 4;
+            createInput(input,c,layout);
+            
+            //Prompt team
+            c.gridx = 2;
+            c.gridy = 5;
+            createLabel(teamName,"",c,layout);
+            
+            //Team list
+            teamList = new JList(array1);
+            teamList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            teamList.setVisibleRowCount(-1);
+            teamList.setBackground(Color.decode("#525151"));
+            teamList.setForeground(Color.white);
+            JScrollPane teamScroller = new JScrollPane(teamList);
+            teamScroller.setPreferredSize(new Dimension(400, 200));
+            teamScroller.setMinimumSize(new Dimension(400, 200));
+            c.gridx = 2;
+            c.gridy = 6;
+            layout.setConstraints(teamScroller, c);
+            this.add(teamScroller);
+            teamList.addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    enableButtons();
+                }
+            });
+            
+            //Advance
+            c.weightx = 0.5;
+            c.gridx = 2;
+            c.gridy = 7;
+            createButton(buttonAdvance, "", c, layout);
+            attachStateChanger(buttonAdvance, new MenuBetweenRounds());
+            advance();
+            
+            //Go back
+            c.weightx = 0.5;
+            c.gridx = 2;
+            c.gridy = 8;
+            createButton(buttonBack, "", c, layout);
+            attachStateChanger(buttonBack, new MenuMain());
+            
+            setBackground(panelPanelImage);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MenuNew.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void enableButtons(){
@@ -134,22 +140,26 @@ public class MenuNew extends State {
         buttonAdvance.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PrintWriter writer;
                 try {
-                    writer = new PrintWriter("SaveGame.xml");
-                    writer.print("");
-                    writer.close();
-                } catch (FileNotFoundException error) {
-                    error.printStackTrace();
-                }
-                
-                StateManager.setLeague(rest.League.readResources("ResourceV6.xml"));
-                StateManager.getLeague().setGameName(input.getText());
-                StateManager.getLeague().setChosenTeam(teamList.getSelectedValue().toString());
-                StateManager.getLeague().writeToXML("SaveGame.xml");
-                
-                for (int i=0; i<StateManager.getLeague().getTeams().size(); i++){
-                    StateManager.getLeague().getTeams().get(i).setLineUp(StateManager.getLeague().getTeams().get(i).getDefaultLineUp());
+                    PrintWriter writer;
+                    try {
+                        writer = new PrintWriter("SaveGame.xml");
+                        writer.print("");
+                        writer.close();
+                    } catch (FileNotFoundException error) {
+                        error.printStackTrace();
+                    }
+                    
+                    StateManager.setLeague(rest.League.readResources("ResourceV6.xml"));
+                    StateManager.getLeague().setGameName(input.getText());
+                    StateManager.getLeague().setChosenTeam(teamList.getSelectedValue().toString());
+                    StateManager.getLeague().writeToXML("SaveGame.xml");
+                    
+                    for (int i=0; i<StateManager.getLeague().getTeams().size(); i++){
+                        StateManager.getLeague().getTeams().get(i).setLineUp(StateManager.getLeague().getTeams().get(i).getDefaultLineUp());
+                    }
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(MenuNew.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
