@@ -5,9 +5,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import rest.League;
-import rest.Player;
-import rest.Team;
 
 public class TeamTest {
 
@@ -268,5 +265,157 @@ public class TeamTest {
         
         
     }
+    
+    @Test
+    public void getPlayersAttackersTest() {
+        Team c = new Team("TestTeam", "Arena", 10000);
+        //G, D, M, F
+        Player sp1 = new Player("sp1", 1, 500, 99, 99, 99, "F", 0, 0);
+        Player sp2 = new Player("sp2", 2, 500, 99, 99, 99, "F", 0, 0);
+        Player sp3 = new Player("sp3", 3, 500, 99, 99, 99, "F", 0, 0);
+        Player sp4 = new Player("sp4", 4, 500, 99, 99, 99, "F", 0, 0);
+        Player sp5 = new Player("sp5", 5, 500, 99, 99, 99, "D", 0, 0);
+        
+        c.add(sp1);
+        c.add(sp2);
+        c.add(sp5);
+        c.add(sp3);
+        c.add(sp4);
 
+        
+        assertTrue(c.getPlayersAttackers().contains(sp1));
+        assertTrue(c.getPlayersAttackers().contains(sp3));
+        assertFalse(c.getPlayersAttackers().contains(sp4));
+        assertFalse(c.getPlayersAttackers().contains(sp5));
+        
+    }
+    
+    @Test
+    public void getPlayersMidfieldersTest() {
+        Team c = new Team("TestTeam", "Arena", 10000);
+        //G, D, M, F
+        Player sp1 = new Player("sp1", 1, 500, 99, 99, 99, "M", 0, 0);
+        Player sp2 = new Player("sp2", 2, 500, 99, 99, 99, "M", 0, 0);
+        Player sp3 = new Player("sp3", 3, 500, 99, 99, 99, "M", 0, 0);
+        Player sp4 = new Player("sp4", 4, 500, 99, 99, 99, "M", 0, 0);
+        Player sp5 = new Player("sp5", 5, 500, 99, 99, 99, "F", 0, 0);
+        
+        c.add(sp1);
+        c.add(sp2);
+        c.add(sp5);
+        c.add(sp3);
+        c.add(sp4);
+
+        
+        assertTrue(c.getPlayersMidfielders().contains(sp1));
+        assertTrue(c.getPlayersMidfielders().contains(sp3));
+        assertFalse(c.getPlayersMidfielders().contains(sp4));
+        assertFalse(c.getPlayersMidfielders().contains(sp5));
+        
+    }
+    
+    @Test
+    public void getPlayersDefendersTest() {
+        Team c = new Team("TestTeam", "Arena", 10000);
+        //G, D, M, F
+        Player sp1 = new Player("sp1", 1, 500, 99, 99, 99, "D", 0, 0);
+        Player sp2 = new Player("sp2", 2, 500, 99, 99, 99, "D", 0, 0);
+        Player sp3 = new Player("sp3", 3, 500, 99, 99, 99, "D", 0, 0);
+        Player sp4 = new Player("sp4", 4, 500, 99, 99, 99, "D", 0, 0);
+        Player sp5 = new Player("sp5", 5, 500, 99, 99, 99, "G", 0, 0);
+        Player sp6 = new Player("sp6", 6, 500, 99, 99, 99, "D", 0, 0);
+        
+        c.add(sp1);
+        c.add(sp2);
+        c.add(sp5);
+        c.add(sp3);
+        c.add(sp4);
+        c.add(sp6);
+        
+        assertTrue(c.getPlayersDefenders().contains(sp1));
+        assertTrue(c.getPlayersDefenders().contains(sp4));
+        assertFalse(c.getPlayersDefenders().contains(sp5));
+        assertFalse(c.getPlayersDefenders().contains(sp6));
+    }
+
+    @Test
+    public void getPlayersKeepersTest() {
+        Team c = new Team("TestTeam", "Arena", 10000);
+        //G, D, M, F
+        Player sp1 = new Player("sp1", 1, 500, 99, 99, 99, "D", 0, 0);
+        Player sp2 = new Player("sp2", 2, 500, 99, 99, 99, "G", 0, 0);
+        Player sp3 = new Player("sp3", 3, 500, 99, 99, 99, "G", 0, 0);
+        
+        c.add(sp1);
+        c.add(sp2);
+        c.add(sp3);
+        
+        assertTrue(c.getPlayersKeepers().contains(sp2));
+        assertFalse(c.getPlayersKeepers().contains(sp1));
+        assertFalse(c.getPlayersKeepers().contains(sp3));
+    }
+    
+    @Test
+    public void getPlayerByStringTest() {
+        Team c = new Team("TestTeam", "Arena", 10000);
+        //G, D, M, F
+        Player sp1 = new Player("sp1", 1, 500, 99, 99, 99, "D", 0, 0);
+        Player sp2 = new Player("sp2", 2, 500, 99, 99, 99, "G", 0, 0);
+        Player sp3 = new Player("sp3", 3, 500, 99, 99, 99, "G", 0, 0);
+        
+        c.add(sp1);
+        c.add(sp2);
+        c.add(sp3);
+        
+        assertEquals(c.getPlayerByName("sp1"), sp1);
+        assertTrue(c.getPlayerByName("sp1").equals(sp1));
+        assertFalse(c.getPlayerByName("sp1").equals(sp2));
+    }
+    
+    @Test
+    public void affordToSellTest() {
+        Team c = new Team("TestTeam", "Arena", 10000);
+        //G, D, M, F
+        Player sp1 = new Player("sp1", 1, 500, 99, 99, 99, "G", 0, 0);
+        Player sp2 = new Player("sp2", 2, 500, 99, 99, 99, "D", 0, 0);
+        Player sp3 = new Player("sp3", 3, 500, 99, 99, 99, "D", 0, 0);
+        Player sp4 = new Player("sp4", 4, 500, 99, 99, 99, "D", 0, 0);
+        Player sp5 = new Player("sp5", 5, 500, 99, 99, 99, "D", 0, 0);
+        Player sp6 = new Player("sp6", 6, 500, 99, 99, 99, "M", 0, 0);
+        Player sp7 = new Player("sp7", 7, 500, 99, 99, 99, "M", 0, 0);
+        Player sp8 = new Player("sp8", 8, 500, 99, 99, 99, "M", 0, 0);
+        Player sp9 = new Player("sp9", 9, 500, 99, 99, 99, "F", 0, 0);
+        Player sp10 = new Player("sp10", 10, 500, 99, 99, 99, "F", 0, 0);
+        Player sp11 = new Player("sp11", 11, 500, 99, 99, 99, "F", 0, 0);
+        c.add(sp1);
+        c.add(sp2);
+        c.add(sp3);
+        c.add(sp4);
+        c.add(sp5);
+        c.add(sp6);
+        c.add(sp7);
+        c.add(sp8);
+        c.add(sp9);
+        c.add(sp10);
+        c.add(sp11);
+        
+        assertFalse(c.affordToSell(sp1));
+        assertFalse(c.affordToSell(sp2));
+        assertFalse(c.affordToSell(sp3));
+        assertFalse(c.affordToSell(sp4));
+        
+        Player sp12 = new Player("sp12", 12, 500, 99, 99, 99, "G", 0, 0);
+        Player sp13 = new Player("sp13", 13, 500, 99, 99, 99, "D", 0, 0);
+        Player sp14 = new Player("sp14", 14, 500, 99, 99, 99, "M", 0, 0);
+        Player sp15 = new Player("sp15", 15, 500, 99, 99, 99, "F", 0, 0);
+        c.add(sp12);
+        c.add(sp13);
+        c.add(sp14);
+        c.add(sp15);
+        
+        assertTrue(c.affordToSell(sp1));
+        assertTrue(c.affordToSell(sp2));
+        assertTrue(c.affordToSell(sp3));
+        assertTrue(c.affordToSell(sp4));
+    }
 }

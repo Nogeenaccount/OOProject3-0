@@ -6,6 +6,7 @@
 package rest;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -206,9 +207,19 @@ public class LeagueTest {
     assertFalse(testleague.Transfer(soortTransactie, offerFormat));
     String offerFormat2 = "Crystal Palace -123500000 Scott Dann";
     assertFalse(testleague.Transfer(soortTransactie, offerFormat2));
-    
-    
 }
+    @Test
+    public void generateOfferTest() {
+        String testOffer = testleague.generateOffer();
+        Scanner testScanner = new Scanner(testOffer);
+        testScanner.next();
+        while (testScanner.hasNextInt() == false) {
+                testScanner.next();
+        }
+        assertTrue(testScanner.hasNextInt());
+        testScanner.nextInt();
+        assertTrue(testScanner.hasNext());
+    }
     
     
     
