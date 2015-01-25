@@ -15,15 +15,6 @@ public class MatchLogic{
     private Team team1;
     private Team team2;
     
-
-    private double t1Offence;
-    private double t1Defence;
-    private double t1Endurance;
-
-    private double t2Offence;
-    private double t2Defence;
-    private double t2Endurance;
-
     private ArrayList<Update> fullUpdateList = new ArrayList<Update>();
     
     /**
@@ -340,93 +331,5 @@ public class MatchLogic{
     public void setTeam2(Team team2) {
         this.team2 = team2;
     }
-
-    /**
-     * @return the t1Offence
-     */
-    public double getT1Offence() {
-        return t1Offence;
-    }
-
-    /**
-     * @param t1Offence the t1Offence to set
-     */
-    public void setT1Offence(double t1Offence) {
-        this.t1Offence = t1Offence;
-    }
-
-    /**
-     * @return the t1Defence
-     */
-    public double getT1Defence() {
-        return t1Defence;
-    }
-
-    /**
-     * @param t1Defence the t1Defence to set
-     */
-    public void setT1Defence(double t1Defence) {
-        this.t1Defence = t1Defence;
-    }
-
-    /**
-     * @return the t1Endurance
-     */
-    public double getT1Endurance() {
-        return t1Endurance;
-    }
-
-    /**
-     * @param t1Endurance the t1Endurance to set
-     */
-    public void setT1Endurance(double t1Endurance) {
-        this.t1Endurance = t1Endurance;
-    }
-
-    /**
-     * @return the t2Offence
-     */
-    public double getT2Offence() {
-        return t2Offence;
-    }
-
-    /**
-     * @param t2Offence the t2Offence to set
-     */
-    public void setT2Offence(double t2Offence) {
-        this.t2Offence = t2Offence;
-    }
-
-    /**
-     * @return the t2Defence
-     */
-    public double getT2Defence() {
-        return t2Defence;
-    }
-
-    /**
-     * @param t2Defence the t2Defence to set
-     */
-    public void setT2Defence(double t2Defence) {
-        this.t2Defence = t2Defence;
-    }
-
-    /**
-     * @return the t2Endurance
-     */
-    public double getT2Endurance() {
-        return t2Endurance;
-    }
-
-    /**
-     * @param t2Endurance the t2Endurance to set
-     */
-    public void setT2Endurance(double t2Endurance) {
-        this.t2Endurance = t2Endurance;
-    }
-
-    
-
    
-        
 }

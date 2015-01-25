@@ -171,6 +171,7 @@ public class Team {
 	return counter;
 
     }
+    
     /**
      * Returns a desired number of players that suits the lineup requirements
      * @return list of either attackers/ midfielder/ defenders/ a keeper
@@ -188,12 +189,12 @@ public class Team {
              return aanvallers;
 	}
       
-      /**
+    /**
        * Returns a palyers when a shirt number is given
        * @param shn
        * @return Desired payer
        */
-      public Player getByShirtNumber(int shn){
+    public Player getByShirtNumber(int shn){
             Player p = null;
             Player q = null;
             for(int i =0; i < this.getPlayers().size(); i++){
@@ -210,12 +211,12 @@ public class Team {
             }
         }
       
-      /**
+    /**
        * Accepteert een String waarin de lineup een string representatie is van shirtnummers gescheiden door komma's
        * @param lu
        * @return Een volwaardige opstelling
        */  
-            public LineUp convertToLineUp(String lineup){
+    public LineUp convertToLineUp(String lineup){
             LineUp lup = new LineUp();
             Player tempKeeper = null;
             ArrayList<Player> tempVerdedigers = new ArrayList<Player>();
@@ -251,11 +252,11 @@ public class Team {
             return lup;
             }
             
-           /**
+    /**
      * Returns a desired number of players that suits the lineup requirements
      * @return list of either attackers/ midfielder/ defenders/ a keeper
      */
-        public ArrayList<Player> getPlayersDefenders() {
+    public ArrayList<Player> getPlayersDefenders() {
 	  ArrayList<Player> verdedigers = new ArrayList<Player>();
              for(int i = 0; i<players.size(); i++){
                  if(players.get(i).getPosition().equals("D")){
@@ -268,11 +269,12 @@ public class Team {
              }
              return verdedigers;
 	}
-           /**
+    
+    /**
      * Returns a desired number of players that suits the lineup requirements
      * @return list of either attackers/ midfielder/ defenders/ a keeper
      */
-        public ArrayList<Player> getPlayersMidfielders() {
+    public ArrayList<Player> getPlayersMidfielders() {
 		  ArrayList<Player> middenvelders = new ArrayList<Player>();
              for(int i = 0; i<players.size(); i++){
                  if(players.get(i).getPosition().equals("M")){
@@ -284,11 +286,12 @@ public class Team {
              }
              return middenvelders;
 	}
-           /**
+    
+    /**
      * Returns a desired number of players that suits the lineup requirements
      * @return list of either attackers/ midfielder/ defenders/ a keeper
      */
-        public ArrayList<Player> getPlayersKeepers() {
+    public ArrayList<Player> getPlayersKeepers() {
 		  ArrayList<Player> keepers = new ArrayList<Player>();
              for(int i = 0; i<players.size(); i++){
                  if(players.get(i).getPosition().equals("G")){
@@ -333,7 +336,11 @@ public class Team {
 	return true;
     }
 
-
+    /**
+     * eleminates worst player from the inserted ArrayList
+     * @param List ArrayList<Player>
+     * @return ArrayList<Player>
+     */
     public static ArrayList<Player> eliminateWorstPlayer(ArrayList<Player> List){
         ArrayList<Player> tempList = List;
         int toBeEliminated = 0;
@@ -429,12 +436,12 @@ public class Team {
     }
     // useless comment
     
-        /**
+    /**
          * Method to get a Player by name, String must be in Player format.
          * @param s The string containing the name.
          * @return 
          */
-        public Player getPlayerByString(String s) {
+    public Player getPlayerByString(String s) {
             Player p;
         p = null;
         for (Player player : this.players) {
