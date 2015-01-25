@@ -423,9 +423,10 @@ public class Team {
         } while(middenvelders.size()>3);
 
         // eliminatie van mindere aanvallers
-        do {
+        //do while loop is not working properly, please do not remove if consturction. Bart
+        if(aanvallers.size() > 3) {
             aanvallers = eliminateWorstPlayer(aanvallers);
-        } while(aanvallers.size()>3);
+        } 
 		
 	l.setAanvallers(aanvallers);
 	l.setMiddenvelders(middenvelders);
