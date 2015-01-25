@@ -116,4 +116,8 @@ public abstract class State extends JPanel {
     public void enableButtons() {
         
     }
+    
+    public void onExit() {
+        
+    }
 }

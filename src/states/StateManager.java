@@ -39,6 +39,7 @@ public class StateManager {
     public static void ChangeState(State requestedState){
 	State newState = null;
         newState = requestedState;
+	currentState.onExit();
 	guiFrame.remove(currentState);
 	newState.createGUI();
 	newState.enableButtons();
