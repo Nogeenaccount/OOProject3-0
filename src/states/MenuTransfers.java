@@ -25,10 +25,10 @@ import javax.swing.event.ListSelectionListener;
 //FINISHED WITH FILLER
 public class MenuTransfers extends State {
         //Images
-        String buttonAttemptImage = "GUIFiles\\buttonAttempt.png";
-	String buttonOfferAcceptImage = "GUIFiles\\buttonBuyPlayer.png";
-	String buttonBackImage = "GUIFiles\\buttonDone.png";
-	String panelPanelImage = "GUIFiles\\FootbalStadiumSize.png";
+        String buttonAttemptImage = "GUIFiles/buttonAttempt.png";
+	String buttonOfferAcceptImage = "GUIFiles/buttonBuyPlayer.png";
+	String buttonBackImage = "GUIFiles/buttonDone.png";
+	String panelPanelImage = "GUIFiles/FootbalStadiumSize.png";
     
         //Components
         JTextField teamPrompt = new JTextField();
