@@ -15,7 +15,7 @@ public class LineUp {
 	verdedigers = new ArrayList<Player>();
     }
 
-     public Player getRandomPlayer(){
+    public Player getRandomPlayer(){
             double positie = Math.random();
             double id = Math.random();
             
@@ -45,7 +45,7 @@ public class LineUp {
 	}
     }
     
-         public String lineUpToXML(){
+    public String lineUpToXML(){
             String res = "";
             res += this.getKeeper().getShirtNumber()+", ";
             for(int i = 0; i<4; i++){

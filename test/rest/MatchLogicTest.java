@@ -66,12 +66,12 @@ public class MatchLogicTest {
         Update u = new Update(0, p1, 35);
         String newLine = System.getProperty("line.separator");
         String tab = "    ";
-       
+        MatchLogic temp = new MatchLogic(15,team1,team2);
         // CASE U.TYPE==0
-        assertEquals(MatchLogic.LineGenerator(u, team1, team2),"");
+        assertEquals(temp.LineGenerator(u, team1, team2),"");
         
         u.setType(1);
-        String str = MatchLogic.LineGenerator(u, team1, team2);
+        String str = temp.LineGenerator(u, team1, team2);
         
         // CASE U.TYPE==1
         assertTrue(str.equals(" 35'         Booking at Chelsea!"+newLine+"        p1 is shown a yellow card after a "+newLine+"        hazardous challenge on p1!"+newLine+newLine) ||
@@ -80,7 +80,7 @@ public class MatchLogicTest {
                       str.equals(" 35'         Booking at Chelsea!"+newLine+"        p1 is shown a yellow card after a "+newLine+"        hazardous challenge on p4!"+newLine+newLine) );
         
         u.setType(2);
-        str = MatchLogic.LineGenerator(u, team1, team2);
+        str = temp.LineGenerator(u, team1, team2);
         
         // CASE U.TYPE==2
         assertTrue(str.equals(" 35'         Red card at Chelsea!"+newLine+"        p1 sees red after a schandalous "+newLine+"        charge on p1!"+newLine+newLine) ||
@@ -89,7 +89,7 @@ public class MatchLogicTest {
                       str.equals(" 35'         Red card at Chelsea!"+newLine+"        p1 sees red after a schandalous "+newLine+"        charge on p4!"+newLine+newLine) );
         
         u.setType(3);
-        str = MatchLogic.LineGenerator(u, team1, team2);
+        str = temp.LineGenerator(u, team1, team2);
         
         // CASE U.TYPE==3
         assertTrue(str.equals(" 35'     Injury at Chelsea!"+newLine+"        p1 falls down like a "+newLine+"        dying swallow, and "+newLine+"        will most likely not play next match!"+newLine+newLine) ||
@@ -98,7 +98,7 @@ public class MatchLogicTest {
                       str.equals(" 35'     Injury at Chelsea!"+newLine+"        p1 falls down like a "+newLine+"        dying swallow, and "+newLine+"        will most likely not play next match!"+newLine+newLine) );
 
         u.setType(4);
-        str = MatchLogic.LineGenerator(u, team1, team2);
+        str = temp.LineGenerator(u, team1, team2);
         //System.out.println(str);
        
         // CASE U.TYPE==4 

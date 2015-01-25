@@ -331,7 +331,10 @@ public class MenuTransfers extends State {
                 if (tempOffersTried.contains((String)offerList.getSelectedValue()) == false) {
                     doOffer();
                     budgetDisplay.setText("Your budget: " + StateManager.getLeague().getByName(StateManager.getLeague().getChosenTeam()).getBudget());
-                    playerList.setListData(GiveplayerList((String)buyOrSellList.getSelectedValue(), (String)teamList.getSelectedValue()));
+                    if (buyOrSellList.isSelectionEmpty() == false && teamList.isSelectionEmpty() == false) {
+                        playerList.setListData(GiveplayerList((String)buyOrSellList.getSelectedValue(), (String)teamList.getSelectedValue()));
+                    }
+                    
 		}
 	    }
 	});

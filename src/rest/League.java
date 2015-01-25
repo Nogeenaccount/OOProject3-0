@@ -320,7 +320,6 @@ public class League {
 	return rounds;
     }
 
-    
     public void setRounds(int rounds) {
 	this.rounds = rounds;
     }
@@ -364,8 +363,10 @@ public class League {
        //
         System.out.println(offersMade + " "+offerFormat);
     }
-    
 
+    
+    
+    
     public void writeToXML(String filePath) {
 
 	DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -522,7 +523,7 @@ public class League {
 	 * @param x the player to buy
 	 * @return boolean
 	 */
-	public static boolean acceptOffer(int bod, Player x) {
+    public static boolean acceptOffer(int bod, Player x) {
 
 		int price = x.getPrice();
 //
@@ -557,13 +558,13 @@ public class League {
 
 	}
 
-        /**
+    /**
 	 * Generates an offer, randomly picks a team that is willing to buy a random player of you;
 	 * if the budget is insufficient the method is repeated
 	 * if the team picked is the same as your team the method is repeated
 	 * @return the offer in String format "team,offer, player"
 	 */
-	public String generateOffer() {
+    public String generateOffer() {
                 // Math.floor(Math.random() * size returnes a value between [1,size]
 		//Player attempt = this.chosenTeam().getPlayers().get((int) Math.floor(Math.random() * buyer.getPlayers().size()) );
 		
@@ -585,11 +586,12 @@ public class League {
 			return offerString;
 		}
 	}
-        /**
+        
+    /**
          * Finds the chosen team by comparing the name to alle the team names.
          * @return 
          */
-        public Team chosenTeam() {
+    public Team chosenTeam() {
 	Team own = null;
 	for (int i = 0; i < this.getTeams().size(); i++) {
 		if (this.getTeams().get(i).getTeamName().equalsIgnoreCase(this.getChosenTeam())) {
@@ -600,7 +602,7 @@ public class League {
 
 }
         
-        public Team getTeamByString(String s) {
+    public Team getTeamByString(String s) {
             Team t;
             t = null;
             
@@ -612,18 +614,14 @@ public class League {
 
         return t;
         }
-        
-
-
-
        
-        /**
+    /**
          * Method to transfer a player given the formatted String
          * @param soortTransactie String containing "SELL/BUY"
          * @param offerFormat 
          * @return 
          */
-        public boolean Transfer(String soortTransactie, String offerFormat) {
+    public boolean Transfer(String soortTransactie, String offerFormat) {
             Scanner sc = new Scanner(offerFormat);
             System.out.println("beginning of transfer");
             String team1 = sc.next();
@@ -670,7 +668,7 @@ public class League {
 		return false;
 	}
         
-        public boolean TransferOffer(String soortTransactie, String offerFormat) {
+    public boolean TransferOffer(String soortTransactie, String offerFormat) {
             Scanner sc = new Scanner(offerFormat);
             
             //Team
@@ -745,8 +743,7 @@ public class League {
         }
         
     }
-        
-        
+           
     public void addToLastResultDetailed(Update u){
         LastResultDetailed.add(u);
     }
@@ -762,7 +759,6 @@ public class League {
         this.lastResult = lastResult;
     }
 
-    
     public void setTeam(int i, Team t){
         teams.set(i, t);
     }
