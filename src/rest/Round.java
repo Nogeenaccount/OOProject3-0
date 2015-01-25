@@ -36,9 +36,9 @@ public class Round {
         Team opponent = new Team("","",0);
         for(int i = 0; i< 10; i++){
             if(list.get(i).getHomeTeam() == team){
-                opponent = list.get(i).getHomeTeam();
-            }else if(list.get(i).getAwayTeam() == team){
                 opponent = list.get(i).getAwayTeam();
+            }else if(list.get(i).getAwayTeam() == team){
+                opponent = list.get(i).getHomeTeam();
             }
         }
         return opponent;
