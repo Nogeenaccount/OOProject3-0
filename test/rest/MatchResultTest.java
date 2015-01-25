@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  * @author user
  */
 public class MatchResultTest {
-
+    League testLeague = League.readResources("resourceV6.xml");
     Team team;
     LineUp lineup;
     
@@ -62,5 +62,14 @@ public class MatchResultTest {
     public void testScored(){
         assertTrue(MatchResult.scored(1000,0,100,100,0)==1);
         assertTrue(MatchResult.scored(1000, 2000, 100, 100, 0)==0);
+    }
+    
+    @Test
+    public void testGetResult(){
+        Match result = MatchResult.getResult(testLeague.getByName("Manchester United"),testLeague.getByName("Burnley"),15);
+        assertTrue(result.getHomeScore()>=0);
+        assertTrue(result.getAwayScore()>=0);
+        assertEquals(result.getHomeTeam(),testLeague.getByName("Manchester United"));
+        assertEquals(result.getAwayTeam(),testLeague.getByName("Burnley"));
     }
 }
