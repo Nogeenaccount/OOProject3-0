@@ -147,7 +147,7 @@ public class MatchLogic{
      * @param s the awayteam
      * @return String the stringrepresentation of the ubdate object
      */
-    public static String LineGenerator(Update update, Team t, Team s){
+    public String LineGenerator(Update update, Team t, Team s){
             String newLine = System.getProperty("line.separator");
             String tab = "    ";
             if(update.getMinuut()==0){
