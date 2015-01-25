@@ -228,6 +228,7 @@ public class MenuTransfers extends State {
         
 	//Prompt price attempt
 	attemptPricePrompt.setOpaque(true);
+        
 	attemptPricePrompt.setPreferredSize(new Dimension(400, 20));
 	attemptPricePrompt.setEditable(false);
 	attemptPricePrompt.setText("---");

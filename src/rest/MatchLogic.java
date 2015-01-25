@@ -62,11 +62,11 @@ public class MatchLogic{
                   
             if(MatchResult.scored(MatchResult.offenceSum(getTeam1()), MatchResult.defenceSum(getTeam2()), MatchResult.enduranceSum(getTeam1()), MatchResult.enduranceSum(getTeam2()), gettCurrent())==1){
                 int a = (int)(Math.round(Math.random()*1.49));
-                spelert = getTeam1().getDefaultLineUp().getAanvallers().get(a);
+                spelert = getTeam1().getLineUp().getAanvallers().get(a);
                 return new Update(4, spelert, gettCurrent());
             }         
             else{
-                spelert=getTeam1().getDefaultLineUp().getRandomPlayer();
+                spelert=getTeam1().getLineUp().getRandomPlayer();
                 double temp = Math.random();
                 
                 if(temp<p1){
