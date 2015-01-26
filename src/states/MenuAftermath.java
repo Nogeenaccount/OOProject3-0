@@ -173,7 +173,12 @@ public class MenuAftermath extends State {
             c.gridx = 2;
             c.gridy = 5;
             createButton(buttonAdvance, "", c, layout);
-            attachStateChanger(buttonAdvance, new MenuBetweenRounds());
+            if(StateManager.getLeague().getRounds() != 0) {
+                attachStateChanger(buttonAdvance, new MenuBetweenRounds());
+            }
+            if(StateManager.getLeague().getRounds() == 0) {
+                attachStateChanger(buttonAdvance, new MenuTourneyOverview());
+            }
             buttonAdvance.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

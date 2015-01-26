@@ -72,9 +72,6 @@ public class MenuMatchScreen extends State {
 	createButton(buttonAdvance, "", c, layout);
 	buttonAdvance.setEnabled(false);
 	attachStateChanger(buttonAdvance, new MenuAftermath());
-        if(StateManager.getLeague().getRounds() <= 0) {
-                attachStateChanger(buttonAdvance, new MenuTourneyOverview());
-            }
         
 	Thread t = new Thread(new ThreadTest(buttonAdvance));
 	rest.ThreadTest.setWorkSpace(matchProgress);

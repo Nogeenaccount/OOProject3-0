@@ -149,12 +149,6 @@ public class MenuBetweenRounds extends State {
             rest.Team yourTeam = StateManager.getLeague().getByName(StateManager.getLeague().getChosenTeam());
             yourBudget = yourTeam.getBudget();
             
-            if(StateManager.getLeague().getRounds() <= 0) {
-                buttonNextMatch.setEnabled(false);
-            }
-            
-            
-            
             Match nextMatch = MatchLogic.findOwnMatch(StateManager.getLeague().getRounds());
             String nextOpp;
             if(nextMatch.getHomeTeam().getTeamName().equals(StateManager.getLeague().getChosenTeam())){
