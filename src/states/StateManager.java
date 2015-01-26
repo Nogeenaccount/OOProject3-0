@@ -32,7 +32,7 @@ public class StateManager {
 	guiFrame.add(currentState);
 	guiFrame.setSize(1200, 800);
 	guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	guiFrame.setTitle("Soccer Manager");
+	guiFrame.setTitle("Football Manager");
 	guiFrame.setVisible(true);
     }
 
