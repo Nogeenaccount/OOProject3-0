@@ -35,7 +35,7 @@ public class MatchLogicTest {
 	p1 = new Player("p1", 1, 500, 10, 20, 30, "F", 0, 0);
 	p2 = new Player("p2", 2, 500, 20, 30, 40, "M", 0, 0);
 	p3 = new Player("p3", 3, 500, 30, 40, 50, "D", 0, 0);
-	p4 = new Player("p3", 3, 500, 40, 50, 60, "G", 0, 0);
+	p4 = new Player("p4", 3, 500, 40, 50, 60, "G", 0, 0);
         
         team1.add(p1);
         team1.add(p2);
@@ -138,17 +138,17 @@ public class MatchLogicTest {
     public void tickHomeTest(){
         MatchLogic m = new MatchLogic(35, team1, team2);
         Update uT = m.tickHome();
-        //System.out.println(uT.toString());
+        System.out.println(uT.toString());
         Update uM = new Update(0, p1, 2);
         
         boolean pass = false;
         
         for(int i = 0; i<3; i++){
-            for(int p = 0; p<3; p++){
+            for(int p = 0; p<team1.getPlayers().size(); p++){
                 uM.setType(i);
                 uM.setSpeler(team1.getPlayers().get(p));
                 
-                //System.out.println(uM.toString());
+                System.out.println(uM.toString());
 
                 if(uM.equals(uT))
                     pass = true;
