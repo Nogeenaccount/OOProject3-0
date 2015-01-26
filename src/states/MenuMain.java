@@ -48,7 +48,7 @@ public class MenuMain extends State {
     String buttonContinueImage = "GUIFiles/ContinueButton.png";
     String buttonExitImage = "GUIFiles/ExitButton.png";
     String panelPanelImage = "GUIFiles/FootbalStadiumSize.png";
-    String logo = "GUIFiles/footbalManagerLogo.png";
+    String logo = "GUIFiles/footballManagerLogo.png";
     
     JLabel logoLabel = new JLabel(new ImageIcon(logo));
     JButton buttonNew = new JButton(new ImageIcon(buttonNewImage));
