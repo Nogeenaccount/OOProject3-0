@@ -48,7 +48,9 @@ public class MenuMain extends State {
     String buttonContinueImage = "GUIFiles/ContinueButton.png";
     String buttonExitImage = "GUIFiles/ExitButton.png";
     String panelPanelImage = "GUIFiles/FootbalStadiumSize.png";
+    String logo = "GUIFiles/FMfinal.png";
     
+    JLabel logoLabel = new JLabel(new ImageIcon(logo));
     JButton buttonNew = new JButton(new ImageIcon(buttonNewImage));
     JButton buttonContinue = new JButton(new ImageIcon(buttonContinueImage));
     JButton buttonExit = new JButton(new ImageIcon(buttonExitImage));
@@ -64,17 +66,28 @@ public class MenuMain extends State {
         
         createSpace();
         
+        logoLabel.setOpaque(true);
+	logoLabel.setPreferredSize(new Dimension(514, 216));
+	logoLabel.setMinimumSize(new Dimension(514, 216));
+	logoLabel.setMaximumSize(new Dimension(514, 216));
+	logoLabel.setText("");
+	c.weightx = 0.5;
+	c.gridx = 2;
+	c.gridy = 3;
+	layout.setConstraints(logoLabel, c);
+	this.add(logoLabel);
+        
         //c = new GridBagConstraints();
         c.weightx = 0.5;
         c.gridx = 2;
-        c.gridy = 3;
+        c.gridy = 4;
         createButton(buttonNew, "", c, layout);
         attachStateChanger(buttonNew, new MenuNew());
         
         
         c.weightx = 0.5;
         c.gridx = 2;
-        c.gridy = 4;
+        c.gridy = 5;
         createButton(buttonContinue, "", c, layout);
         attachStateChanger(buttonContinue, new MenuBetweenRounds());
         buttonContinue.addActionListener(new ActionListener() {
@@ -90,7 +103,7 @@ public class MenuMain extends State {
         
         c.weightx = 0.5;
         c.gridx = 2;
-        c.gridy = 5;
+        c.gridy = 6;
         createButton(buttonExit, "", c, layout);
         attachStateChanger(buttonExit, new Exit());
 	
