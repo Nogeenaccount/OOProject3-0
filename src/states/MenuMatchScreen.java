@@ -10,6 +10,7 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -40,9 +41,9 @@ public class MenuMatchScreen extends State {
 	
 	//Prompt Matches
 	progress.setOpaque(true);
-	progress.setPreferredSize(new Dimension(400, 50));
+	//progress.setPreferredSize(new Dimension(400, 50));
 	progress.setMinimumSize(new Dimension(400, 50));
-	progress.setMaximumSize(new Dimension(400, 50));
+	//progress.setMaximumSize(new Dimension(400, 50));
 	progress.setText("");
 	c.weightx = 0.5;
 	c.gridx = 2;
@@ -55,7 +56,7 @@ public class MenuMatchScreen extends State {
 	c.gridx = 2;
 	c.gridy = 3;
 	layout.setConstraints(matchProgress, c);
-	matchProgress.setPreferredSize(new Dimension(400, 400));
+	//matchProgress.setPreferredSize(new Dimension(400, 400));
 	matchProgress.setEditable(false);
 	String matchProgressTextPart1 = "Here is the progress of your match:\n\n";
 	matchProgress.setText(matchProgressTextPart1);
@@ -63,7 +64,10 @@ public class MenuMatchScreen extends State {
 	matchProgress.setForeground(Color.white);
 	matchProgress.setMinimumSize(new Dimension(400, 400));
 	matchProgress.setFont(new Font("Arial", Font.PLAIN, 14));
-	this.add(matchProgress);
+	JScrollPane scroll = new JScrollPane(matchProgress);
+        scroll.setMinimumSize(new Dimension(400,400));
+        layout.setConstraints(scroll,c);
+        this.add(scroll);
 
         //Advance
 	c.weightx = 0.5;
